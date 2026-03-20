@@ -352,7 +352,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "ChemCollective",
     url: "https://chemcollective.org/vlabs",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/10b981/ffffff?text=Titration+Lab",
+    preview: "/assets/chemistry_icon.png",
     guide: "1. Chọn hóa chất từ kho (axit, bazơ, chỉ thị)\n2. Thực hiện thao tác nhỏ giọt chuẩn độ\n3. Quan sát điểm chuyển màu",
     grade: ["Lớp 10-12", "Đại học"]
   },
@@ -364,7 +364,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "ChemCollective",
     url: "https://chemcollective.org/vlabs/solution-making",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/10b981/ffffff?text=Solution+Making",
+    preview: "/assets/chemistry_icon.png",
     guide: "1. Tính toán lượng chất tan cần thiết\n2. Sử dụng cân và bình định mức ảo\n3. Pha chế dung dịch nồng độ chính xác",
     grade: ["Lớp 10-12"]
   },
@@ -402,7 +402,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "BioInteractive",
     url: "https://www.biointeractive.org/classroom-resources/dna-virtual-lab",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/16a34a/ffffff?text=DNA+Electrophoresis",
+    preview: "/assets/feature.png",
     guide: "1. Chuẩn bị mẫu DNA và gel agarose\n2. Chạy điện di và nhuộm gel\n3. Phân tích các băng DNA dưới tia UV",
     grade: ["Lớp 10-12", "Đại học"]
   },
@@ -416,7 +416,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "GeoGebra",
     url: "https://www.geogebra.org/geometry?lang=vi",
     language: "Tiếng Việt",
-    preview: "https://via.placeholder.com/600x400/6366f1/ffffff?text=GeoGebra+Geometry",
+    preview: "/assets/math_icon.png",
     guide: "1. Dùng công cụ để vẽ điểm, đường thẳng, đường tròn\n2. Đo góc và độ dài đoạn thẳng\n3. Quan sát các tính chất hình học khi di chuyển điểm",
     grade: ["Lớp 6-7", "Lớp 8-9"]
   },
@@ -428,7 +428,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "GeoGebra",
     url: "https://www.geogebra.org/graphing?lang=vi",
     language: "Tiếng Việt",
-    preview: "https://via.placeholder.com/600x400/6366f1/ffffff?text=GeoGebra+Graphing",
+    preview: "/assets/math_icon.png",
     guide: "1. Nhập phương trình hàm số (ví dụ: y = x^2)\n2. Quan sát đồ thị được vẽ ngay lập tức\n3. Tìm giao điểm, cực trị",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
@@ -440,7 +440,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "Desmos",
     url: "https://www.desmos.com/calculator?lang=vi",
     language: "Tiếng Việt",
-    preview: "https://via.placeholder.com/600x400/22c55e/ffffff?text=Desmos+Calculator",
+    preview: "/assets/math_icon.png",
     guide: "1. Nhập hàm số bất kỳ\n2. Thêm thanh trượt (slider) cho các tham số\n3. Xem đồ thị biến đổi động khi kéo thanh trượt",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
@@ -488,7 +488,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "Mathigon",
     url: "https://mathigon.org/polypad",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/f43f5e/ffffff?text=Mathigon+Polypad",
+    preview: "/assets/math_icon.png",
     guide: "1. Kéo thả các hình khối, phân số, hoặc đại số từ thanh công cụ\n2. Sắp xếp, xoay, và ghép nối chúng\n3. Dùng để dạy hình học, số học trực quan",
     grade: ["Lớp 6-7", "Lớp 8-9"]
   },
@@ -500,7 +500,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "Khan Academy",
     url: "https://vi.khanacademy.org/math/algebra",
     language: "Tiếng Việt",
-    preview: "https://via.placeholder.com/600x400/14b8a6/ffffff?text=Khan+Academy+Algebra",
+    preview: "/assets/math_icon.png",
     guide: "1. Chọn chủ đề đại số cần ôn tập\n2. Xem video bài giảng và làm bài tập tương tác\n3. Theo dõi tiến độ học tập",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
