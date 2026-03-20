@@ -10,7 +10,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "PhET",
     url: "https://phet.colorado.edu/sims/html/bending-light/latest/bending-light_vi.html",
     language: "Tiếng Việt",
-    preview: "https://phet.colorado.edu/sims/bending-light/bending-light-600.png",
+    preview: "/assets/physics_icon.png", 
     guide: "1. Chọn tab 'Phản xạ'\n2. Điều chỉnh góc tới bằng cách kéo đèn laser\n3. Quan sát góc phản xạ bằng thước đo độ",
     grade: ["Lớp 6-7", "Lớp 8-9", "Lớp 10-12"]
   },
@@ -22,7 +22,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "PhET",
     url: "https://phet.colorado.edu/sims/html/buoyancy/latest/buoyancy_vi.html",
     language: "Tiếng Việt",
-    preview: "https://phet.colorado.edu/sims/buoyancy/buoyancy-600.png",
+    preview: "/assets/physics_icon.png",
     guide: "1. Kéo thả vật vào bể nước\n2. Quan sát mũi tên lực đẩy và trọng lực\n3. Thay đổi khối lượng riêng của vật và chất lỏng",
     grade: ["Lớp 8-9"]
   },
@@ -34,7 +34,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "GeoGebra",
     url: "https://www.geogebra.org/material/iframe/id/hZ7hN4D8",
     language: "Đa ngôn ngữ",
-    preview: "https://www.geogebra.org/resource/hZ7hN4D8/thumbnail.png",
+    preview: "/assets/math_icon.png",
     guide: "1. Điều chỉnh hệ số a, b, c bằng thanh trượt\n2. Quan sát hình dạng parabol thay đổi\n3. Xác định đỉnh và trục đối xứng",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
@@ -46,7 +46,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "PhET",
     url: "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_vi.html",
     language: "Tiếng Việt",
-    preview: "https://phet.colorado.edu/sims/build-an-atom/build-an-atom-600.png",
+    preview: "/assets/chemistry_icon.png",
     guide: "1. Kéo thả proton, neutron, electron vào tâm\n2. Quan sát tên nguyên tố thay đổi\n3. Kiểm tra tính bền vững của hạt nhân",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
@@ -278,7 +278,7 @@ export const simulationDatabase: Simulation[] = [
     platform: "Algodoo",
     url: "http://www.algodoo.com/",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/2563eb/ffffff?text=Algodoo+Physics",
+    preview: "/assets/physics_icon.png", 
     guide: "1. Tải phần mềm hoặc dùng bản web (nếu có)\n2. Vẽ các vật thể 2D và gắn động cơ, lò xo\n3. Nhấn Play để xem mô phỏng vật lý",
     grade: ["Lớp 8-9", "Lớp 10-12"]
   },
@@ -512,8 +512,81 @@ export const simulationDatabase: Simulation[] = [
     platform: "Wolfram",
     url: "https://www.wolframalpha.com/",
     language: "Tiếng Anh",
-    preview: "https://via.placeholder.com/600x400/dd6b20/ffffff?text=Wolfram+Alpha",
+    preview: "/assets/math_icon.png",
     guide: "1. Nhập bất kỳ bài toán nào (bằng tiếng Anh)\n2. Nhận kết quả giải chi tiết từng bước\n3. Xem đồ thị và các thông tin liên quan",
     grade: ["Lớp 10-12", "Đại học"]
+  },
+  // ─── AI Tools for Teachers (Soạn bài & Giảng dạy) ───
+  {
+    id: 101,
+    subject: "Soạn bài",
+    topic: ["giáo án", "bài giảng", "kế hoạch bài dạy", "lesson plan", "AI"],
+    title: "AI Soạn Giáo Án Pro",
+    platform: "AI Assistant",
+    url: "#",
+    language: "Tiếng Việt (Cực chuẩn)",
+    preview: "/assets/feature.png",
+    guide: "1. Nhập tên bài dạy và yêu cầu cụ thể\n2. AI sẽ xây dựng kế hoạch bài dạy 5 bước\n3. Tùy chỉnh và xuất file Word/PDF",
+    grade: ["Tất cả cấp học"]
+  },
+  {
+    id: 102,
+    subject: "Game học tập",
+    topic: ["game", "trò chơi", "quiz", "rung chuông vàng", "ai là triệu phú"],
+    title: "Tạo Game Rung Chuông Vàng",
+    platform: "Game Engine",
+    url: "#",
+    language: "Tiếng Việt",
+    preview: "/assets/hero.png",
+    guide: "1. Nhập bộ câu hỏi hoặc file bài tập\n2. AI tự động thiết kế giao diện game\n3. Trình chiếu trực tiếp trên lớp",
+    grade: ["Lớp 1-12"]
+  },
+  {
+    id: 103,
+    subject: "Đề thi",
+    topic: ["kiểm tra", "đề thi", "trắc nghiệm", "tự luận", "ma trận đề"],
+    title: "Tạo Đề Thi Tự Động",
+    platform: "AI Lab",
+    url: "#",
+    language: "Tiếng Việt",
+    preview: "/assets/mission.png",
+    guide: "1. Tải file tài liệu tham khảo\n2. Chọn mức độ nhận biết - thông hiểu - vận dụng\n3. Nhận ngay đề thi kèm đáp án chi tiết",
+    grade: ["Lớp 6-12"]
+  },
+  {
+    id: 104,
+    subject: "SKKN",
+    topic: ["sáng kiến kinh nghiệm", "báo cáo", "nghiên cứu khoa học"],
+    title: "Viết SKKN Mẫu Thông Minh",
+    platform: "AI Writer",
+    url: "#",
+    language: "Tiếng Việt",
+    preview: "/assets/feature.png",
+    guide: "1. Nhập tên đề tài và kinh nghiệm thực tế\n2. AI xây dựng khung sườn và nội dung mẫu\n3. Chỉnh sửa để phù hợp với ngữ cảnh lớp học",
+    grade: ["Giáo viên"]
+  },
+  {
+    id: 105,
+    subject: "Soạn bài",
+    topic: ["bài giảng điện tử", "e-learning", "scorm", "ppt"],
+    title: "Tạo Bài Giảng Tương Tác",
+    platform: "AI Creator",
+    url: "#",
+    language: "Tiếng Việt",
+    preview: "/assets/hero.png",
+    guide: "1. Nhập chủ đề hoặc tải file tài liệu\n2. AI tự động phân tích và tạo slide bài giảng\n3. Tích hợp các hoạt động tương tác mini-game",
+    grade: ["Tất cả cấp học"]
+  },
+  {
+    id: 106,
+    subject: "Hỗ trợ",
+    topic: ["trợ lý ảo", "tư vấn", "hỏi đáp", "kiến thức giáo dục"],
+    title: "Chatbot Giáo Viên AI 24/7",
+    platform: "AI Assistant",
+    url: "#",
+    language: "Tiếng Việt",
+    preview: "/assets/mission.png",
+    guide: "1. Đặt câu hỏi về bất kỳ chủ đề giáo dục nào\n2. AI trả lời và cung cấp tài liệu tham khảo\n3. Hỗ trợ giải bài tập và gợi ý phương pháp dạy",
+    grade: ["Giáo viên", "Học sinh"]
   }
 ];

@@ -47,7 +47,7 @@ function App() {
       } else {
         setStatus('no-result');
       }
-    }, 600);
+    }, 1000);
   };
 
   // 2. Create with AI
@@ -73,145 +73,161 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-slate-50">
+    <div className="min-h-screen flex flex-col font-sans bg-slate-50 selection:bg-sky-100 selection:text-sky-900">
       <Header
         onOpenGuide={() => setIsGuideOpen(true)}
         currentView={currentView}
         onViewChange={setCurrentView}
       />
 
-      <main className="flex-grow max-w-[1600px] mx-auto w-full px-4 md:px-8 py-8">
+      <main className="flex-1">
+        <div className="section-container">
+          
+          {/* Breadcrumb Section */}
+          {currentView !== 'landing' && (
+            <div className="animate-blur-in flex items-center gap-3 text-xs mb-12 px-6 py-4 bg-white border border-sky-100 rounded-2xl shadow-sm w-fit group">
+              <button 
+                onClick={() => { setCurrentView('landing'); setStatus('idle'); }} 
+                className="text-slate-400 font-black hover:text-sky-600 transition-colors uppercase tracking-widest"
+              >
+                Trang chủ
+              </button>
+              <div className="size-1 rounded-full bg-slate-200"></div>
+              <span className="font-black text-sky-600 uppercase tracking-widest">
+                {currentView === 'search' ? 'Lớp học AI' : 'Thư viện tài nguyên'}
+              </span>
+            </div>
+          )}
 
-        {/* Breadcrumb / Top Info (Hidden on mobile) */}
-        {currentView !== 'landing' && (
-          <div className="hidden md:flex items-center gap-3 text-sm mb-10 px-4 py-3 bg-white border border-sky-100 rounded-2xl shadow-sm">
-            <button onClick={() => setCurrentView('landing')} className="text-slate-500 font-bold hover:text-sky-600 transition-colors">Trang chủ</button>
-            <span className="text-slate-300 font-bold">/</span>
-            <span className="font-black text-sky-600 uppercase tracking-tight">
-              {currentView === 'search' ? 'Tìm kiếm & Tạo mới' : 'Thư viện tài nguyên'}
-            </span>
-          </div>
-        )}
+          {/* VIEW: LANDING */}
+          {currentView === 'landing' && (
+            <div className="animate-blur-in">
+              <Landing onViewChange={setCurrentView} />
+            </div>
+          )}
 
-        {/* --- VIEW: LANDING --- */}
-        {currentView === 'landing' && (
-          <Landing onViewChange={setCurrentView} />
-        )}
+          {/* VIEW: LIBRARY */}
+          {currentView === 'library' && (
+            <div className="animate-blur-in">
+              <LibraryView />
+            </div>
+          )}
 
-        {/* --- VIEW: LIBRARY --- */}
-        {currentView === 'library' && (
-          <LibraryView />
-        )}
+          {/* VIEW: SEARCH & GENERATE */}
+          {currentView === 'search' && (
+            <div className="animate-slide-up max-w-5xl mx-auto space-y-12">
+              <SearchForm
+                isLoading={status === 'searching' || status === 'generating'}
+                onSearchDB={handleSearchDB}
+                onCreateAI={handleCreateAI}
+              />
 
-        {/* --- VIEW: SEARCH & GENERATE --- */}
-        {currentView === 'search' && (
-          <>
-            <SearchForm
-              isLoading={status === 'searching' || status === 'generating'}
-              onSearchDB={handleSearchDB}
-              onCreateAI={handleCreateAI}
-            />
+              {/* SEARCH RESULTS / AI GENERATION STATES */}
+              {status !== 'idle' && (
+                <div className="glass-card rounded-[40px] p-10 md:p-16 relative overflow-hidden">
+                   {/* Background Decorative */}
+                   <div className="absolute top-0 right-0 w-80 h-80 bg-sky-50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-60" />
+                   
+                   {/* ─── LOADING: SEARCHING ─── */}
+                   {status === 'searching' && (
+                     <div className="flex flex-col items-center justify-center py-10 text-center animate-in fade-in zoom-in-95 duration-500">
+                        <div className="relative mb-10">
+                          <div className="absolute inset-0 bg-sky-200 rounded-full blur-2xl animate-pulse"></div>
+                          <div className="bg-white p-8 rounded-3xl shadow-xl relative z-10 animate-float">
+                             <Database className="text-sky-600" size={56} />
+                          </div>
+                        </div>
+                        <h3 className="text-3xl font-black text-slate-900 mb-3 uppercase tracking-tighter">Đang tìm trong kho...</h3>
+                        <p className="text-slate-500 font-bold max-w-xs mx-auto">Chúng tôi đang quét {simulationDatabase.length} tài nguyên để tìm nội dung phù hợp nhất.</p>
+                     </div>
+                   )}
 
-            {/* RESULT AREA */}
-            <div className="mt-12 transition-all max-w-[1200px] mx-auto">
+                   {/* ─── LOADING: GENERATING ─── */}
+                   {status === 'generating' && (
+                     <div className="flex flex-col items-center justify-center py-10 text-center animate-in fade-in zoom-in-95 duration-500">
+                        <div className="relative mb-12">
+                          <div className="absolute inset-0 bg-indigo-200 rounded-full blur-3xl animate-pulse"></div>
+                          <div className="bg-white p-10 rounded-full shadow-2xl relative z-10">
+                             <Sparkles className="text-indigo-600 animate-bounce" size={64} />
+                          </div>
+                        </div>
+                        <h2 className="text-4xl font-black bg-gradient-to-r from-sky-600 to-indigo-700 bg-clip-text text-transparent uppercase tracking-tighter mb-4">AI Đang sáng tạo...</h2>
+                        <p className="text-slate-500 font-black max-w-md mx-auto leading-relaxed mb-12">
+                          Vui lòng đợi trong giây lát, trợ lý AI đang lập trình mã nguồn HTML5 tương tác cho chủ đề <span className="text-sky-600 underline">"{searchParams?.topic}"</span>.
+                        </p>
+                        
+                        <div className="w-full max-w-sm bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-white shadow-inner relative">
+                          <div className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 h-full rounded-full animate-progress" />
+                        </div>
+                     </div>
+                   )}
 
-              {/* STATE: Searching DB */}
-              {status === 'searching' && (
-                <div className="text-center py-12">
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-teal-50 w-20 h-20 mx-auto flex items-center justify-center mb-6 relative">
-                    <div className="absolute inset-0 border-4 border-teal-50 rounded-2xl"></div>
-                    <div className="absolute inset-0 border-4 border-[#0D9488] border-t-transparent rounded-2xl animate-spin"></div>
-                    <Database size={32} className="text-[#0D9488]" />
-                  </div>
-                  <p className="text-slate-600 font-bold text-lg">Đang truy xuất dữ liệu kho...</p>
-                  <p className="text-slate-400 text-sm mt-1">Đang tìm kiếm trong {simulationDatabase.length} mô phỏng có sẵn</p>
+                   {/* ─── ERROR ─── */}
+                   {status === 'error' && (
+                     <div className="flex flex-col items-center justify-center py-16 text-center animate-in fade-in slide-in-from-top-4">
+                        <div className="bg-rose-50 p-8 rounded-full text-rose-500 mb-8 border-4 border-white shadow-xl">
+                          <AlertCircle size={64} strokeWidth={2.5} />
+                        </div>
+                        <h3 className="text-3xl font-black text-slate-900 mb-3 uppercase tracking-tighter">Có lỗi xảy ra</h3>
+                        <p className="text-slate-500 font-bold mb-10 max-w-sm">Rất tiếc, AI không thể phản hồi vào lúc này. Vui lòng kiểm tra lại Key hoặc kết nối mạng.</p>
+                        <button 
+                          onClick={() => setStatus('idle')}
+                          className="bg-slate-900 text-white font-black py-4 px-12 rounded-2xl hover:bg-slate-800 transition-all uppercase tracking-widest text-xs shadow-xl"
+                        >
+                          Quay lại thử lại
+                        </button>
+                     </div>
+                   )}
+
+                   {/* ─── NO RESULT found in DB ─── */}
+                   {status === 'no-result' && (
+                     <div className="flex flex-col items-center justify-center py-10 text-center animate-in fade-in zoom-in-95">
+                        <div className="bg-amber-50 p-8 rounded-full text-amber-500 mb-8 border-4 border-white shadow-xl">
+                          <SearchX size={64} strokeWidth={2.5} />
+                        </div>
+                        <h3 className="text-3xl font-black text-slate-900 mb-3 uppercase tracking-tighter">Trống kho dữ liệu</h3>
+                        <p className="text-slate-500 font-bold max-w-md mb-12">Chúng tôi chưa có mô phỏng này trong thư viện. Sử dụng sức mạnh AI để tự tay tạo mới ngay bây giờ!</p>
+                        <button 
+                          onClick={() => handleCreateAI(searchParams!)}
+                          className="group bg-sky-600 hover:bg-sky-700 text-white font-black py-5 px-12 rounded-[24px] shadow-2xl shadow-sky-600/40 transition-all active:scale-95 flex items-center gap-4 uppercase tracking-widest text-xs"
+                        >
+                          <Sparkles size={24} className="group-hover:rotate-12 transition-transform text-amber-300" />
+                          Dùng AI tạo ngay
+                          <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
+                        </button>
+                     </div>
+                   )}
+
+                   {/* ─── FOUND: Result from DB ─── */}
+                   {status === 'found' && (
+                     <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
+                        <div className="flex items-center gap-6 mb-12">
+                           <div className="h-[1px] flex-1 bg-sky-100"></div>
+                           <div className="flex items-center gap-2">
+                              <Database size={16} className="text-sky-400" />
+                              <h4 className="text-[10px] font-black text-sky-400 uppercase tracking-[0.3em] whitespace-nowrap">Kết quả từ thư viện</h4>
+                           </div>
+                           <div className="h-[1px] flex-1 bg-sky-100"></div>
+                        </div>
+                        <div className="space-y-8">
+                          {dbResults.map(sim => (
+                            <ResultFound key={sim.id} simulation={sim} />
+                          ))}
+                        </div>
+                     </div>
+                   )}
+
+                   {/* ─── SUCCESS: AI Result ─── */}
+                   {status === 'generated' && aiResult && searchParams && (
+                     <div className="animate-in fade-in slide-in-from-bottom-12 duration-1000">
+                        <ResultGenerated data={aiResult} topic={searchParams.topic} />
+                     </div>
+                   )}
                 </div>
-              )}
-
-              {/* STATE: Generating AI */}
-              {status === 'generating' && (
-                <div className="fixed inset-0 z-[100] bg-teal-900/40 backdrop-blur-md flex items-center justify-center p-4">
-                  <div className="bg-white p-10 rounded-3xl shadow-2xl border border-teal-50 flex flex-col items-center gap-6 max-w-sm text-center">
-                    <div className="relative">
-                      <div className="size-24 border-4 border-sky-50 rounded-full"></div>
-                      <div className="absolute inset-0 border-4 border-sky-600 border-t-transparent rounded-full animate-spin"></div>
-                      <span className="absolute inset-0 flex items-center justify-center text-sky-600">
-                        <Sparkles size={32} />
-                      </span>
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-slate-800 mb-2">Đang khởi tạo mô phỏng...</h2>
-                      <p className="text-slate-500 text-sm leading-relaxed">AI đang viết mã HTML, Canvas logic và thiết kế giao diện cho chủ đề <strong>"{searchParams?.topic}"</strong></p>
-                    </div>
-                    <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden mt-4">
-                      <div className="bg-sky-600 h-full w-[65%] rounded-full shadow-[0_0_15px_rgba(2,132,199,0.4)] animate-[loading_2s_ease-in-out_infinite]"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* STATE: Error */}
-              {status === 'error' && (
-                <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center text-red-700 shadow-sm max-w-xl mx-auto">
-                  <AlertCircle size={48} className="mx-auto mb-4 text-red-500" />
-                  <h3 className="font-bold text-xl mb-2">Đã xảy ra lỗi kết nối</h3>
-                  <p className="text-red-600/70 mb-6 text-sm">Không thể kết nối với máy chủ AI. Vui lòng kiểm tra đường truyền.</p>
-                  <button
-                    onClick={() => setStatus('idle')}
-                    className="bg-white border border-red-200 text-red-600 font-bold py-3 px-8 rounded-xl hover:bg-red-50 transition"
-                  >
-                    Quay lại
-                  </button>
-                </div>
-              )}
-
-              {/* STATE: No Result Found */}
-              {status === 'no-result' && (
-                <div className="text-center py-10 bg-white rounded-3xl border border-dashed border-teal-200 p-12">
-                  <div className="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
-                    <SearchX size={40} />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">Không tìm thấy trong thư viện</h3>
-                  <p className="text-slate-500 mb-8 max-w-md mx-auto">
-                    Chủ đề <strong>"{searchParams?.topic}"</strong> chưa có sẵn. Hãy sử dụng AI để tạo mô phỏng mới ngay lập tức.
-                  </p>
-                  <button
-                    onClick={() => handleCreateAI(searchParams!)}
-                    className="bg-sky-600 hover:bg-sky-700 text-white font-black py-5 px-10 rounded-2xl shadow-2xl shadow-sky-600/30 transition transform hover:-translate-y-1 active:scale-95 flex items-center gap-3 mx-auto uppercase tracking-tight text-sm"
-                  >
-                    <Sparkles size={22} className="text-amber-300" />
-                    <span>Dùng AI tạo mô phỏng ngay</span>
-                    <ArrowRight size={22} />
-                  </button>
-                </div>
-              )}
-
-              {/* STATE: Found DB Results */}
-              {status === 'found' && (
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between mb-2 px-2">
-                    <div className="flex items-center gap-3">
-                      <div className="size-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                      <h3 className="font-black text-slate-800 uppercase tracking-widest text-xs">Kết quả từ thư viện</h3>
-                    </div>
-                    <span className="bg-white border border-sky-100 text-sky-600 text-[10px] font-black px-4 py-1.5 rounded-full shadow-sm">{dbResults.length} KẾT QUẢ</span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-6">
-                    {dbResults.map(sim => (
-                      <ResultFound key={sim.id} simulation={sim} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* STATE: AI Generated Result */}
-              {status === 'generated' && aiResult && (
-                <ResultGenerated data={aiResult} topic={searchParams?.topic || 'Custom Simulation'} />
               )}
             </div>
-          </>
-        )}
-
+          )}
+        </div>
       </main>
 
       <Footer />
@@ -220,16 +236,28 @@ function App() {
       <SettingsModal />
 
       <style>{`
-        @keyframes loading {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(250%); }
+        @keyframes progress {
+          0% { width: 0; }
+          100% { width: 100%; }
         }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        .animate-progress {
+          animation: progress 10s linear;
         }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #e2e8f0;
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #cbd5e1;
+        }
+        .animate-spin-slow {
+          animation: spin 8s linear infinite;
         }
       `}</style>
     </div>

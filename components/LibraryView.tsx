@@ -9,7 +9,7 @@ const LibraryView: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Get unique subjects from DB plus "Tất cả"
-  const allSubjects = ['Tất cả', ...SUBJECTS, 'Khoa học tự nhiên'];
+  const allSubjects = ['Tất cả', ...SUBJECTS, 'Soạn bài', 'Game học tập', 'Đề thi', 'SKKN', 'Hỗ trợ'];
 
   const filteredSimulations = simulationDatabase.filter(sim => {
     const matchSubject = activeSubject === 'Tất cả' || sim.subject === activeSubject;

@@ -13,8 +13,7 @@ interface LandingProps {
 
 const CATEGORIES = [
   "Tất cả", "SOẠN GIÁO ÁN PRO", "GAME HAY", "TẠO ĐỀ THI", 
-  "PDF TO WORD", "TẠO SKKN", "CHATBOT PRO", "Phiếu học tập", 
-  "Sáng tạo truyện", "Tiếng Anh", "Toán học"
+  "MÔ PHỎNG AI", "TẠO SKKN", "CHATBOT PRO", "Phiếu học tập"
 ];
 
 const TOOLS = [
@@ -229,10 +228,22 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
                   {tool.badge}
                 </div>
               </div>
+              <div className="mb-6 h-32 flex items-center justify-center bg-slate-50/50 rounded-2xl overflow-hidden group-hover:scale-105 transition-transform">
+                <img 
+                  src={
+                    tool.category === "Toán học" ? "/assets/math_icon.png" :
+                    tool.category === "MÔ PHỎNG AI" ? "/assets/physics_icon.png" :
+                    tool.category === "SOẠN GIÁO ÁN PRO" ? "/assets/feature.png" :
+                    "/assets/hero.png"
+                  } 
+                  alt={tool.title} 
+                  className="h-full object-contain"
+                />
+              </div>
               <h3 className="text-xl font-black text-slate-900 mb-3 group-hover:text-sky-600 transition-colors uppercase tracking-tight">
                 {tool.title}
               </h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow">
+              <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow line-clamp-2">
                 {tool.desc}
               </p>
               <button 
