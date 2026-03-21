@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({ onGoToSearch }) => {
           <div className="space-y-8">
             <h3 className="text-lg font-black uppercase tracking-widest text-sky-400">Ứng dụng AI</h3>
             <ul className="space-y-4">
-              {['Soạn giáo án Pro', 'Game học tập Online', 'Tạo đề thi tự động', 'Viết SKKN mẫu', 'Xưởng truyện tranh AI'].map(link => (
+              {['Trợ lý bài giảng AI', 'Thiết kế mô phỏng 3D', 'Ngân hàng đề thi thông minh', 'Tối ưu hóa giáo án', 'Hỗ trợ nghiên cứu khoa học'].map(link => (
                 <li key={link}>
                   <a href="#" className="text-slate-400 hover:text-white flex items-center gap-2 group transition-all">
                     <ChevronRight size={16} className="text-sky-600 group-hover:translate-x-1 transition-transform" />

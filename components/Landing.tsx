@@ -53,7 +53,6 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
               Giúp giáo viên tiết kiệm hàng giờ soạn giáo án, tạo đề thi và mô phỏng tương tác chỉ trong vài giây với công nghệ AI tiên tiến.
             </p>
-            
             <div className="flex flex-col sm:flex-row gap-5">
               <button 
                 onClick={() => onViewChange('search')}
@@ -61,13 +60,6 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
               >
                 Trải Nghiệm Ngay
                 <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
-              </button>
-              <button 
-                onClick={() => onViewChange('search')}
-                className="btn-secondary py-5 px-10 text-lg group"
-              >
-                <MonitorPlay size={22} />
-                Xem Demo
               </button>
             </div>
           </div>
