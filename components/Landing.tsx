@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { 
   Sparkles, Microscope, Search, Database, Code, 
   ArrowRight, Globe2, BookOpen, MonitorPlay, 
@@ -13,6 +13,15 @@ interface LandingProps {
 }
 
 const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
+  const handleShowSimulationCreator = () => onViewChange('search');
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleShowSimulationCreator();
+    }
+  };
+
   const stats = [
     { label: 'Nền Tảng Đa Năng', value: 'AI', icon: <Sparkles size={20}/> },
     { label: 'Chủ Đề Tiêu Biểu', value: '4+', icon: <BookOpen size={20}/> },
@@ -238,7 +247,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           <div className="mx-auto grid max-w-[1560px] grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4 xl:gap-10">
           
           {/* Card 1: Physics / Optics */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
@@ -265,7 +274,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 2: Biology / Cell */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-emerald-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-emerald-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                {/* Organic Cell mockup */}
@@ -284,7 +293,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 3: Chemistry / Titration */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-rose-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-rose-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl group-hover:bg-rose-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                {/* Beaker setup */}
@@ -310,7 +319,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 4: Math / Graphs */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-sky-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-sky-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-3xl group-hover:bg-sky-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] bg-[length:15px_15px] opacity-30"></div>
@@ -333,7 +342,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 5: Physics / Pendulum */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                <div className="absolute inset-0 bg-gradient-to-b from-white via-cyan-50/30 to-slate-50"></div>
@@ -360,7 +369,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 6: Astronomy / Solar System */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(15,23,42,0.95),_rgba(30,41,59,1))]"></div>
@@ -398,7 +407,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 7: Geography / Earth Core */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                {/* Core mockup */}
@@ -419,7 +428,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           </div>
 
           {/* Card 8: Physics / Mechanics */}
-          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-violet-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+          <div onClick={handleShowSimulationCreator} onKeyDown={handleCardKeyDown} role="button" tabIndex={0} className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-violet-900/10 transition-all flex flex-col h-full overflow-hidden relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-violet-300 focus:ring-offset-4">
             <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 rounded-full blur-3xl group-hover:bg-violet-500/20 transition-colors"></div>
             <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
                {/* Spring mockup */}

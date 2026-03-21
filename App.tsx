@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchForm from './components/SearchForm';
@@ -27,6 +27,14 @@ function App() {
   const [aiResult, setAiResult] = useState<AIResult | null>(null);
   const [searchParams, setSearchParams] = useState<SearchParams | null>(null);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [currentView]);
+
+  const handleViewChange = (view: ViewState) => {
+    setCurrentView(view);
+  };
 
   const handleGoToSearch = () => {
     setCurrentView('search');
@@ -85,7 +93,7 @@ function App() {
       <Header
         onOpenGuide={() => setIsGuideOpen(true)}
         currentView={currentView}
-        onViewChange={setCurrentView}
+        onViewChange={handleViewChange}
       />
 
       <main className="flex-1 w-full">
@@ -95,7 +103,7 @@ function App() {
           {currentView !== 'landing' && (
             <div className="animate-blur-in flex items-center gap-3 text-xs mb-12 px-6 py-4 bg-white border border-sky-100 rounded-2xl shadow-sm w-fit group">
               <button 
-                onClick={() => { setCurrentView('landing'); setStatus('idle'); }} 
+                onClick={() => { handleViewChange('landing'); setStatus('idle'); }} 
                 className="text-slate-400 font-black hover:text-sky-600 transition-colors uppercase tracking-widest"
               >
                 Trang chủ
@@ -110,7 +118,7 @@ function App() {
           {/* VIEW: LANDING */}
           {currentView === 'landing' && (
             <div className="animate-blur-in">
-              <Landing onViewChange={setCurrentView} />
+              <Landing onViewChange={handleViewChange} />
             </div>
           )}
 
