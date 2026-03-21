@@ -13,39 +13,12 @@ interface LandingProps {
 }
 
 const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
-  const [activeCategory, setActiveCategory] = useState("Tất cả");
-
-  // Derive categories from DB subjects
-  const categories = useMemo(() => {
-    const subjects = Array.from(new Set(simulationDatabase.map(sim => sim.subject)));
-    return ["Tất cả", ...subjects];
-  }, []);
-
-  const filteredTools = useMemo(() => {
-    const tools = activeCategory === "Tất cả" 
-      ? simulationDatabase.slice(0, 12) // Show top 12 initially
-      : simulationDatabase.filter(sim => sim.subject === activeCategory);
-    return tools;
-  }, [activeCategory]);
-
   const stats = [
     { label: 'Giáo viên sử dụng', value: '1,500+', icon: <Users size={20}/> },
     { label: 'Công cụ AI', value: '25+', icon: <Sparkles size={20}/> },
     { label: 'Tiết kiệm thời gian', value: '80%', icon: <Trophy size={20}/> },
     { label: 'Mô phỏng sẵn có', value: `${simulationDatabase.length}+`, icon: <Database size={20}/> },
   ];
-
-  const getBadgeStyle = (subject: string) => {
-    switch(subject) {
-      case 'Vật lý': return 'bg-blue-100 text-blue-700';
-      case 'Hóa học': return 'bg-emerald-100 text-emerald-700';
-      case 'Toán học': return 'bg-purple-100 text-purple-700';
-      case 'Sinh học': return 'bg-rose-100 text-rose-700';
-      case 'Soạn bài': return 'bg-amber-100 text-amber-700';
-      case 'Game học tập': return 'bg-indigo-100 text-indigo-700';
-      default: return 'bg-slate-100 text-slate-700';
-    }
-  };
 
   return (
     <div className="w-full bg-[#f8fafc] flex flex-col gap-24 pb-24">
@@ -69,7 +42,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             </h1>
             
             <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
-              Giúp giáo viên tiết kiệm hàng giờ soạn giáo án, tạo đề thi và mô phỏng tương tác chỉ trong vài giây với công nghệ Gemini AI tiên tiến nhất.
+              Giúp giáo viên tiết kiệm hàng giờ soạn giáo án, tạo đề thi và mô phỏng tương tác chỉ trong vài giây với công nghệ AI tiên tiến.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-5">
@@ -150,80 +123,233 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
         </div>
       </section>
 
-      {/* TOOLS REPOSITORY */}
-      <section id="tools" className="section-container space-y-16">
+      {/* AI SIMULATION GENERATION FEATURE */}
+      <section id="features" className="section-container space-y-16">
+        <style>{`
+          @keyframes swing {
+            0% { transform: rotate(25deg); }
+            100% { transform: rotate(-25deg); }
+          }
+        `}</style>
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">Kho Tài Nguyên Giáo Dục Chọn Lọc</h2>
-          <p className="text-slate-500 text-lg">Khám phá và sử dụng hàng trăm mô phỏng, công cụ AI được thiết kế chuyên biệt cho từng môn học.</p>
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">Biến Ý Tưởng Thành Mô Phỏng Tương Tác</h2>
+          <p className="text-slate-500 text-lg">Chỉ với những dòng mô tả đơn giản bằng tiếng Việt, trợ lý AI sẽ tự động thiết kế các mô hình ảo hoá trực quan dành riêng cho bài giảng của bạn.</p>
         </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-3 px-4">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all border-2 ${
-                activeCategory === cat 
-                ? "bg-sky-600 border-sky-600 text-white shadow-lg shadow-sky-600/30 scale-105" 
-                : "bg-white border-sky-50 text-slate-400 hover:border-sky-200 hover:text-sky-600"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredTools.map((tool) => (
-            <div key={tool.id} className="group bg-white rounded-[32px] p-8 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-sky-900/10 transition-all hover:-translate-y-2 flex flex-col h-full border-b-4 border-b-transparent hover:border-b-sky-500">
-              <div className="flex justify-between items-start mb-6">
-                <div className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${getBadgeStyle(tool.subject)}`}>
-                  {tool.subject}
-                </div>
-                <div className="bg-sky-50 text-sky-600 px-3 py-1 rounded-full text-[10px] font-black border border-sky-100 uppercase tracking-tighter">
-                  {tool.platform}
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Feature text & list */}
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-100 text-sky-600 font-bold text-sm border border-sky-200 shadow-sm">
+                <Sparkles size={16} />
+                <span>Hoàn Toàn Tự Động</span>
               </div>
-              
-              <div className="mb-6 h-40 flex items-center justify-center bg-slate-50/50 rounded-2xl overflow-hidden group-hover:scale-105 transition-transform p-4">
-                <img 
-                  src={tool.preview || "/assets/feature.png"} 
-                  alt={tool.title} 
-                  className="w-full h-full object-contain pointer-events-none"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/assets/feature.png";
-                  }}
-                />
-              </div>
-
-              <h3 className="text-xl font-black text-slate-900 mb-3 group-hover:text-sky-600 transition-colors uppercase tracking-tight leading-snug">
-                {tool.title}
-              </h3>
-              
-              <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
-                {tool.topic.join(', ')}
+              <h3 className="text-3xl font-black text-slate-900">Xây dựng thế giới trực quan với Trợ Lý AI</h3>
+              <p className="text-slate-600 leading-relaxed text-lg">
+                Chỉ cần đóng vai người đạo diễn và đưa ra ý tưởng. Hệ thống trí tuệ nhân tạo sẽ tự động xây dựng bối cảnh và tương tác trong vài giây, tái hiện các hiện tượng Vật lý, phản ứng Hoá học hay Toán học một cách chân thực nhất để giảng dạy.
               </p>
-
-              <button 
-                onClick={() => onViewChange('library')}
-                className="w-full py-4 bg-slate-50 group-hover:bg-sky-600 group-hover:text-white text-sky-700 font-black rounded-2xl transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-[10px]"
-              >
-                Khám phá ngay
-                <ArrowRight size={16} />
-              </button>
             </div>
-          ))}
+            
+            <div className="space-y-4">
+              {[
+                { title: 'Hỗ trợ Đa Môn Học', desc: 'Vật lý, Hoá học, Toán hay Sinh học, bất kỳ khái niệm nào bạn muốn mô hình hoá.', icon: <Database className="text-sky-600" /> },
+                { title: 'Tương Tác Thời Gian Thực', desc: 'Học sinh có thể tự do điều chỉnh thông số, thay đổi biến số và quan sát kết quả.', icon: <PlayCircle className="text-sky-600" /> },
+                { title: 'Tinh Chỉnh Bằng Chữ', desc: 'Chưa ưng ý? Gõ thêm yêu cầu để AI tinh chỉnh màu sắc, số liệu hay chức năng.', icon: <MessageSquare className="text-sky-600" /> }
+              ].map((ft, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-4 rounded-3xl hover:bg-white hover:shadow-xl hover:shadow-sky-900/5 transition-all border border-transparent hover:border-sky-50 group">
+                  <div className="p-3 bg-sky-50 rounded-2xl group-hover:bg-sky-100 transition-colors">
+                    {ft.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg">{ft.title}</h4>
+                    <p className="text-slate-500 text-sm mt-1">{ft.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button 
+              onClick={() => onViewChange('search')}
+              className="btn-primary w-full sm:w-auto justify-center group"
+            >
+              Tạo mô phỏng đầu tiên <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+            </button>
+          </div>
+
+          {/* Visualization Graphic */}
+          <div className="relative">
+            <div className="absolute inset-0 bg-sky-200/50 blur-[100px] rounded-full"></div>
+            <div className="relative bg-white border-2 border-sky-50 rounded-[40px] shadow-2xl overflow-hidden shadow-sky-900/10">
+              {/* Fake Browser header */}
+              <div className="bg-slate-50 px-6 py-4 border-b border-sky-50 flex items-center gap-3">
+                <div className="flex gap-2">
+                  <div className="size-3 rounded-full bg-rose-400"></div>
+                  <div className="size-3 rounded-full bg-amber-400"></div>
+                  <div className="size-3 rounded-full bg-emerald-400"></div>
+                </div>
+                <div className="bg-white text-xs text-slate-400 px-4 py-1.5 rounded-full flex-1 text-center font-bold border border-sky-50 shadow-sm mx-4 flex items-center justify-center gap-2">
+                  <MonitorPlay size={12} className="text-sky-600"/>
+                  Mô phỏng 3D: Hệ Mặt Trời
+                </div>
+              </div>
+              {/* Fake Content */}
+              <div className="p-8 aspect-square flex flex-col items-center justify-center relative bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] bg-slate-50/50 overflow-hidden">
+                <div className="absolute top-4 right-4 bg-sky-100 text-sky-700 text-[10px] font-black uppercase px-3 py-1 rounded-full animate-pulse border border-sky-200 z-10 shadow-sm">
+                  Chế Độ Tương Tác
+                </div>
+                
+                {/* Visual Solar System animation logic */}
+                <div className="relative size-40 flex items-center justify-center mt-8">
+                  {/* Orbit Track */}
+                  <div className="absolute inset-0 rounded-full border-2 border-sky-200/60 border-dashed"></div>
+                  
+                  {/* Sun */}
+                  <div className="size-14 rounded-full bg-gradient-to-br from-amber-300 to-orange-500 shadow-[0_0_40px_rgba(251,191,36,0.5)] z-10 flex items-center justify-center">
+                    <div className="size-8 rounded-full bg-white/30 blur-[4px]"></div>
+                  </div>
+
+                  {/* Planet Container (rotates) */}
+                  <div className="absolute w-full h-full animate-[spin_4s_linear_infinite]">
+                    {/* Planet */}
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 size-7 bg-white p-1 rounded-full shadow-lg border border-sky-100">
+                      <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-sky-600"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16 w-full max-w-[200px] bg-white border border-sky-100 p-4 rounded-2xl shadow-xl shadow-sky-900/5 z-10">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Tốc độ quỹ đạo</span>
+                    <span className="text-xs font-black text-sky-600">x1.5</span>
+                  </div>
+                  <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden relative">
+                    <div className="absolute top-0 left-0 w-1/2 h-full bg-sky-400 rounded-full"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-4 bg-white border-2 border-sky-600 rounded-full shadow"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating element */}
+            <div className="absolute -left-6 top-1/2 p-4 bg-slate-900 text-white rounded-3xl shadow-2xl flex items-center gap-4 border-4 border-white animate-float z-20">
+               <div className="p-3 bg-slate-800 rounded-2xl"><MessageSquare size={20} className="text-sky-400"/></div>
+               <div className="text-sm font-medium">"Trợ lý tăng tốc độ quay <br/>của Trái Đất lên nhé"</div>
+            </div>
+          </div>
         </div>
 
-        {/* See All Button */}
+        {/* Integrated Gallery inside the same section */}
+        <div className="pt-8 w-full border-t border-sky-100">
+          <div className="text-center space-y-4 max-w-3xl mx-auto mb-12 pt-8">
+            <h3 className="text-3xl font-black text-slate-900">Và Không Giới Hạn Khả Năng Tiềm Ẩn</h3>
+            <p className="text-slate-500 text-lg">Áp dụng cho mọi cấp học và lĩnh vực, từ nguyên tử vi mô đến quỹ đạo vũ trụ vĩ mô.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          {/* Card 1: Physics / Optics */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+              {/* Fake Prism */}
+              <div className="relative w-24 h-24 flex items-center justify-center -translate-y-2">
+                 {/* Prism triangle */}
+                 <div className="w-0 h-0 border-l-[30px] border-l-transparent border-r-[30px] border-r-transparent border-b-[52px] border-b-indigo-200/50 backdrop-blur-sm z-10 relative shadow-2xl shadow-indigo-500/20 drop-shadow-lg scale-110"></div>
+                 {/* White light beam */}
+                 <div className="absolute top-1/2 -left-[60px] w-20 h-1 bg-white shadow-[0_0_10px_white] rotate-12 -translate-y-1/2 z-20 mix-blend-screen"></div>
+                 <div className="absolute top-1/2 -left-[80px] w-28 h-1 bg-white shadow-[0_0_15px_white] rotate-12 -translate-y-1/2 blur-[1px]"></div>
+                 {/* Rainbow beams */}
+                 <div className="absolute top-1/2 right-[-60px] w-20 h-[2px] bg-red-400 rotate-[-10deg] shadow-[0_0_8px_red] blur-[1px]"></div>
+                 <div className="absolute top-1/2 right-[-60px] w-20 h-[2px] bg-yellow-400 rotate-[-15deg] shadow-[0_0_8px_yellow] blur-[1px]"></div>
+                 <div className="absolute top-1/2 right-[-60px] w-20 h-[2px] bg-emerald-400 rotate-[-20deg] shadow-[0_0_8px_green] blur-[1px]"></div>
+                 <div className="absolute top-1/2 right-[-60px] w-20 h-[2px] bg-blue-400 rotate-[-25deg] shadow-[0_0_8px_blue] blur-[1px]"></div>
+                 <div className="absolute top-1/2 right-[-60px] w-20 h-[2px] bg-purple-400 rotate-[-30deg] shadow-[0_0_8px_purple] blur-[1px]"></div>
+              </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-indigo-50 text-indigo-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Vật Lý</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors">Tán Sắc Ánh Sáng</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Bộ lăng kính ảo cho phép học sinh tự do điều chỉnh góc chiếu và độ rộng chùm sáng để khám phá quang phổ và sự khúc xạ vô cùng an toàn.</p>
+            </div>
+          </div>
+
+          {/* Card 2: Biology / Cell */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-emerald-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               {/* Organic Cell mockup */}
+               <div className="relative size-24 bg-emerald-100 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] border-4 border-emerald-300 shadow-[inset_0_0_20px_rgba(52,211,153,0.5)] animate-[spin_10s_linear_infinite] group-hover:animate-[spin_4s_linear_infinite] transition-all flex items-center justify-center overflow-hidden">
+                  <div className="size-8 bg-purple-400 rounded-full opacity-80 blur-[2px] shadow-lg absolute"></div>
+                  <div className="size-3 bg-emerald-400 rounded-full absolute top-4 left-4 blur-[1px]"></div>
+                  <div className="size-4 bg-rose-400 rounded-full border-2 border-rose-500 absolute bottom-4 right-6"></div>
+                  <div className="size-2 bg-amber-400 rounded-full absolute bottom-1/2 left-3"></div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-emerald-50 text-emerald-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Sinh Học</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-emerald-600 transition-colors">Cấu Trúc Tế Bào 3D</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Học sinh có thể bóc tách từng lớp cấu tạo của tế bào động thực vật, tìm hiểu chức năng của từng bào quan thông qua chạm tương tác.</p>
+            </div>
+          </div>
+
+          {/* Card 3: Chemistry / Titration */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-rose-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl group-hover:bg-rose-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               {/* Beaker setup */}
+               <div className="relative mt-8 flex flex-col items-center">
+                  {/* Drop */}
+                  <div className="size-2 bg-sky-400 rounded-full rounded-t-sm rotate-45 animate-bounce absolute -top-8 opacity-70 blur-[1px] shadow-[0_10px_20px_rgba(56,189,248,0.8)]"></div>
+                  {/* Flask */}
+                  <div className="w-12 h-14 border-l-4 border-r-4 border-b-4 border-white bg-slate-200/50 backdrop-blur-md rounded-b-xl relative overflow-hidden shadow-2xl z-10 flex items-end">
+                     {/* Liquid */}
+                     <div className="w-full h-1/2 bg-rose-400 group-hover:bg-purple-500 transition-colors duration-1000 origin-bottom scale-y-[1] animate-pulse">
+                        <div className="absolute inset-0 bg-white/20 -translate-y-2 blur-[2px] animate-[spin_3s_linear_infinite]"></div>
+                     </div>
+                  </div>
+                  {/* Stand fake */}
+                  <div className="w-20 h-1.5 bg-slate-300 rounded mt-1 shadow-sm"></div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-rose-50 text-rose-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Hoá Học</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-rose-600 transition-colors">Chuẩn Độ Dung Dịch</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Giả lập phòng thí nghiệm trọn vẹn. Đo lường nồng độ chuẩn xác và mô phỏng phản ứng đổi màu ngay lập tức mà không lo rủi ro cháy nổ.</p>
+            </div>
+          </div>
+
+          {/* Card 4: Math / Graphs */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-sky-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-full blur-3xl group-hover:bg-sky-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] bg-[length:15px_15px] opacity-30"></div>
+               {/* Math Graph svg */}
+               <svg className="w-full h-full relative z-10 p-4" viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet">
+                 <path d="M0,25 Q25,-10 50,25 T100,25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-sky-400 drop-shadow-[0_0_5px_rgba(56,189,248,0.8)]" strokeDasharray="150" strokeDashoffset="0">
+                   <animate attributeName="stroke-dashoffset" values="150;0" dur="2.5s" repeatCount="indefinite" />
+                 </path>
+                 <circle cx="50" cy="25" r="2" fill="currentColor" className="text-blue-600 animate-ping opacity-70" />
+                 {/* X Y axis */}
+                 <line x1="50" y1="0" x2="50" y2="50" stroke="#94a3b8" strokeWidth="0.5" strokeDasharray="2" />
+                 <line x1="0" y1="25" x2="100" y2="25" stroke="#94a3b8" strokeWidth="0.5" strokeDasharray="2" />
+               </svg>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-sky-50 text-sky-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Toán Học</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-sky-600 transition-colors">Đồ Thị Hàm Số</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Di chuyển hệ số bằng thanh trượt trực quan và chứng kiến đường cong đồ thị dịch chuyển theo thời gian thực vô cùng mượt mà.</p>
+            </div>
+          </div>
+        </div>
+        </div>
+
         <div className="text-center pt-8">
           <button 
             onClick={() => onViewChange('library')}
-            className="btn-secondary py-5 px-12 group"
+            className="btn-secondary py-5 px-12 group mx-auto inline-flex"
           >
-            Xem tất cả {simulationDatabase.length} tài nguyên
+            Khám phá 2,500+ mô phỏng khác
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -288,7 +414,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           {[
             { step: '01', title: 'Chọn Công Cụ', desc: 'Duyệt qua kho công cụ AI đa dạng và chọn chức năng bạn cần.', icon: <Search size={28}/> },
             { step: '02', title: 'Nhập Nội Dung', desc: 'Mô tả ngắn gọn yêu cầu hoặc tải tài liệu lên để AI xử lý.', icon: <Sparkles size={28}/> },
-            { step: '03', title: 'Nhận Kết Quả', desc: 'AI tự động sinh mã, văn bản hoặc mô phỏng. Xuất và sử dụng ngay!', icon: <ArrowRight size={28}/> },
+            { step: '03', title: 'Nhận Kết Quả', desc: 'AI trả về cảnh quan 3D hoặc mô phỏng tương tác. Lưu lại và sử dụng ngay!', icon: <ArrowRight size={28}/> },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center gap-8 group">
               <div className="size-24 bg-white shadow-2xl shadow-sky-600/10 rounded-[32px] border border-sky-50 flex items-center justify-center relative transition-transform group-hover:-translate-y-2">

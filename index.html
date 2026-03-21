@@ -12,7 +12,7 @@
   <style>
     body {
       font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
-      background-color: #F0F9F9;
+      background-color: #F4F7FB;
       /* background-light from reference */
       color: #1A2E2C;
     }
@@ -23,18 +23,40 @@
     }
 
     ::-webkit-scrollbar-track {
-      background: rgba(13, 148, 136, 0.1);
+      background: rgba(166, 222, 175, 0.1);
     }
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(13, 148, 136, 0.5);
+      background: rgba(166, 222, 175, 0.5);
       border-radius: 10px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(13, 148, 136, 0.8);
+      background: rgba(166, 222, 175, 0.8);
     }
   </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sky: {
+              50: '#f5fcf5',
+              100: '#e6f7e9',
+              200: '#cdedd4',
+              300: '#a6deaf',
+              400: '#7ac987',
+              500: '#69c282',
+              600: '#5fb879', // Main pastel leaf green
+              700: '#3c8f49',
+              800: '#295a31',
+              900: '#1b3b20',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <script type="importmap">
 {
   "imports": {

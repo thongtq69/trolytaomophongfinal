@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --primary: #0284c7; /* Sky 600 */
-  --primary-light: #e0f2fe; /* Sky 100 */
-  --primary-hover: #0369a1; /* Sky 700 */
-  --accent: #0ea5e9; /* Sky 500 */
-  --background: #f8fafc; /* Slate 50 */
+  --primary: #5fb879; /* Pastel Green */
+  --primary-light: #e6f7e9; /* Soft Green */
+  --primary-hover: #3c8f49; /* Darker Green */
+  --accent: #a6deaf; /* Accent Pastel Green */
+  --background: #f7fbf8; /* Soft Background */
   --card-bg: #ffffff;
-  --text-main: #1e293b; /* Slate 800 */
-  --text-muted: #64748b; /* Slate 500 */
-  --pastel-blue: #f0f9ff;
+  --text-main: #142e1d; /* Dark Slate Greenish text */
+  --text-muted: #64748b; 
+  --pastel-blue: #f5fcf5;
 }
 
 body {
@@ -39,7 +39,7 @@ body {
   }
   
   .section-container {
-    @apply max-w-7xl mx-auto px-4 md:px-8 py-24;
+    @apply w-full max-w-7xl mx-auto px-4 md:px-8 py-24;
   }
   
   .heading-xl {

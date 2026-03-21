@@ -71,14 +71,6 @@ const SettingsModal: React.FC = () => {
                                     >
                                         Lấy API Key ngay <ExternalLink size={16} />
                                     </a>
-                                    <a
-                                        href="https://drive.google.com/drive/folders/1G6eiVeeeEvsYgNk2Om7FEybWf30EP1HN?usp=drive_link"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-white border border-blue-200 text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition"
-                                    >
-                                        Xem hướng dẫn chi tiết <ExternalLink size={16} />
-                                    </a>
                                 </div>
                             </div>
                         </div>

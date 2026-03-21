@@ -7,6 +7,8 @@ import ResultGenerated from './components/ResultGenerated';
 import LibraryView from './components/LibraryView';
 import GuideModal from './components/GuideModal';
 import Landing from './components/Landing';
+import About from './components/About';
+import Blog from './components/Blog';
 import { Simulation, SearchParams, SearchStatus, AIResult } from './types';
 import { simulationDatabase } from './services/simulationData';
 import { generateSimulationContent } from './services/geminiService';
@@ -15,7 +17,7 @@ import { Loader2, AlertCircle, Database, SearchX, ArrowRight, Sparkles } from 'l
 import SettingsModal from './components/SettingsModal';
 import { useSettings } from './contexts/SettingsContext';
 
-type ViewState = 'landing' | 'search' | 'library';
+type ViewState = 'landing' | 'search' | 'library' | 'about' | 'blog';
 
 function App() {
   const { apiKey, selectedModel, setIsSettingsOpen } = useSettings();
@@ -94,7 +96,7 @@ function App() {
               </button>
               <div className="size-1 rounded-full bg-slate-200"></div>
               <span className="font-black text-sky-600 uppercase tracking-widest">
-                {currentView === 'search' ? 'Lớp học AI' : 'Thư viện tài nguyên'}
+                {currentView === 'search' ? 'Lớp học AI' : currentView === 'library' ? 'Thư viện tài nguyên' : currentView === 'about' ? 'Về chúng tôi' : 'Blog'}
               </span>
             </div>
           )}
@@ -110,6 +112,20 @@ function App() {
           {currentView === 'library' && (
             <div className="animate-blur-in">
               <LibraryView />
+            </div>
+          )}
+
+          {/* VIEW: ABOUT */}
+          {currentView === 'about' && (
+            <div className="animate-blur-in">
+              <About />
+            </div>
+          )}
+
+          {/* VIEW: BLOG */}
+          {currentView === 'blog' && (
+            <div className="animate-blur-in">
+              <Blog />
             </div>
           )}
 

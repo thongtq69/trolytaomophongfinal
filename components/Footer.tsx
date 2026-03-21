@@ -1,5 +1,5 @@
 import React from 'react';
-import { Microscope, Facebook, Twitter, Mail, Phone, MapPin, ExternalLink, ChevronRight, Globe2, BookOpen, MonitorPlay, Sparkles } from 'lucide-react';
+import { Microscope, Facebook, Twitter, Mail, ChevronRight, Globe2, Sparkles } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px]"></div>
 
       <div className="max-w-[1600px] mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-20">
           
           {/* Brand Column */}
           <div className="space-y-8">
@@ -55,40 +55,20 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Resources */}
-          <div className="space-y-8">
-            <h3 className="text-lg font-black uppercase tracking-widest text-sky-400">Tài nguyên</h3>
-            <ul className="space-y-4">
-              {['Thư viện PhET', 'Mô phỏng OPhysics', 'Học liệu Falstad', 'Cộng đồng Giáo viên AI', 'Khóa học Đào tạo'].map(link => (
-                <li key={link}>
-                  <a href="#" className="text-slate-400 hover:text-white flex items-center gap-2 group transition-all">
-                    <ChevronRight size={16} className="text-sky-600 group-hover:translate-x-1 transition-transform" />
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Special CTA */}
           <div className="bg-gradient-to-br from-sky-900 to-indigo-950 p-8 rounded-[40px] border border-white/10 space-y-6 relative group overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
               <Sparkles size={80} fill="white" />
             </div>
             
-            <h3 className="text-xl font-black text-white leading-tight">Nâng Tầm Giảng Dạy Ngay Hôm Nay!</h3>
+            <h3 className="text-xl font-black text-white leading-tight">Sẵn sàng tạo bài giảng tương tác?</h3>
             <p className="text-sky-200/60 text-sm leading-relaxed">
-              Nhận bộ tài liệu hướng dẫn sử dụng AI miễn phí khi liên hệ với chúng tôi qua Zalo hoặc Form đăng ký.
+              Thiết lập API Key trong phần cài đặt và bắt đầu tạo mô phỏng AI trực tiếp ngay trên hệ thống.
             </p>
-            <a 
-              href="https://forms.gle/19fbZmmHW5rEtxxG7" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="inline-flex items-center gap-2 px-6 py-4 bg-sky-600 hover:bg-sky-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-sky-900/50 w-full justify-center group"
-            >
-              ĐĂNG KÝ NGAY
-              <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </a>
+            <div className="inline-flex items-center gap-2 px-6 py-4 bg-white/10 text-white font-black rounded-2xl border border-white/10 w-full justify-center">
+              MỞ CÀI ĐẶT ĐỂ BẮT ĐẦU
+              <ArrowRight size={20} />
+            </div>
           </div>
         </div>
 
