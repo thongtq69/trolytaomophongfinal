@@ -42,7 +42,8 @@ export const SUBJECTS = [
   "Vật lý",
   "Hóa học",
   "Sinh học",
-  "Toán học"
+  "Toán học",
+  "Khoa học tự nhiên"
 ];
 
 export const GRADES = [
