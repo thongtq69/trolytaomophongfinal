@@ -5,13 +5,12 @@ import FileUploader from './FileUploader';
 
 interface SearchFormProps {
   isLoading: boolean;
-  onSearchDB: (params: SearchParams) => void;
   onCreateAI: (params: SearchParams) => void;
 }
 
 type InputMode = 'topic' | 'file';
 
-const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreateAI }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onCreateAI }) => {
   const [inputMode, setInputMode] = useState<InputMode>('topic');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
@@ -39,14 +38,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
     });
   };
 
-  const handleSubmitDB = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.topic.trim()) {
-      alert("Vui lòng nhập chủ đề cần tìm!");
-      return;
-    }
-    onSearchDB(formData);
-  };
+
 
   const handleSubmitAI = () => {
     if (inputMode === 'topic') {
@@ -93,7 +85,11 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 md:p-8 max-w-[1200px] mx-auto relative z-10 overflow-hidden">
+    <div className="relative max-w-[1200px] mx-auto z-10 group">
+      {/* Animated gradient border */}
+      <div className="absolute -inset-[3px] bg-gradient-to-r from-sky-300 via-indigo-400 to-sky-300 rounded-[35px] opacity-80 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]"></div>
+      
+      <div className="bg-white rounded-[32px] p-6 md:p-8 relative overflow-hidden h-full shadow-2xl">
       {/* Decorative background */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-sky-100/50 to-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-indigo-100/50 to-sky-100/50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
@@ -111,13 +107,16 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
               </h2>
               <p className="text-sm font-bold text-sky-600/70 flex items-center gap-1.5 mt-1 uppercase tracking-wider text-[10px]">
                 <Sparkles size={14} className="text-amber-500" />
-                Tìm kiếm thư viện hoặc Tạo mới bằng AI
+                Mô tả ý tưởng của bạn để AI hiện thực hóa
               </p>
             </div>
           </div>
         </div>
 
-        <form onSubmit={handleSubmitDB} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <form 
+          onSubmit={(e) => { e.preventDefault(); handleSubmitAI(); }} 
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8"
+        >
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-6">
             {/* Section Header */}
@@ -139,7 +138,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
                   <select
                     value={formData.subject}
                     onChange={(e) => handleInputChange('subject', e.target.value)}
-                    className="w-full rounded-2xl border-2 border-slate-100 bg-slate-50 focus:border-sky-400 focus:ring-8 focus:ring-sky-500/10 transition-all text-sm font-black py-4 pl-11 pr-4 appearance-none cursor-pointer hover:border-sky-200"
+                    className="w-full rounded-2xl border-2 border-slate-300 bg-slate-50 focus:border-sky-400 focus:ring-8 focus:ring-sky-500/10 transition-all text-sm font-black py-4 pl-11 pr-4 appearance-none cursor-pointer hover:border-sky-300"
                   >
                     {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
@@ -158,7 +157,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
                 <select
                   value={formData.grade}
                   onChange={(e) => handleInputChange('grade', e.target.value)}
-                  className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 focus:border-amber-400 focus:ring-4 focus:ring-amber-100 transition-all text-sm font-semibold py-3.5 px-4 appearance-none cursor-pointer hover:border-amber-300"
+                  className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:border-amber-400 focus:ring-4 focus:ring-amber-100 transition-all text-sm font-semibold py-3.5 px-4 appearance-none cursor-pointer hover:border-amber-400"
                 >
                   {GRADES.map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
@@ -166,7 +165,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
             </div>
 
             {/* Input Mode Toggle */}
-            <div className="flex gap-1 p-1.5 bg-gradient-to-r from-slate-100 to-slate-50 rounded-2xl border border-slate-200">
+            <div className="flex gap-1 p-1.5 bg-gradient-to-r from-slate-100 to-slate-50 rounded-2xl border-2 border-slate-300">
               <button
                 type="button"
                 onClick={() => setInputMode('topic')}
@@ -202,7 +201,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
                   value={formData.topic}
                   onChange={(e) => handleInputChange('topic', e.target.value)}
                   placeholder="Ví dụ: Cấu trúc nguyên tử, Định luật Ohm, Quang hợp..."
-                  className="w-full rounded-xl border-2 border-slate-200 bg-white focus:border-teal-400 focus:ring-4 focus:ring-teal-100 transition-all text-sm font-medium py-3.5 px-4 shadow-sm hover:border-teal-300"
+                  className="w-full rounded-xl border-2 border-slate-300 bg-white focus:border-teal-400 focus:ring-4 focus:ring-teal-100 transition-all text-sm font-medium py-3.5 px-4 shadow-sm hover:border-teal-400"
                 />
               </label>
             ) : (
@@ -243,7 +242,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
                   rows={2}
                   value={formData.parameters}
                   onChange={(e) => handleInputChange('parameters', e.target.value)}
-                  className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 focus:border-slate-400 focus:ring-4 focus:ring-slate-100 transition-all text-sm py-3 px-4 resize-none hover:border-slate-300"
+                  className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:border-slate-500 focus:ring-4 focus:ring-slate-100 transition-all text-sm py-3 px-4 resize-none hover:border-slate-400"
                   placeholder="Góc tới, điện trở, khối lượng, nhiệt độ..."
                 />
               </label>
@@ -267,7 +266,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
                           flex items-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all duration-200
                           ${isSelected
                             ? `bg-gradient-to-r ${colors[idx]} text-white border-transparent shadow-md`
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:shadow-sm'
+                            : 'bg-white border-2 border-slate-300 text-slate-600 hover:border-slate-400 hover:shadow-sm'
                           }
                         `}
                       >
@@ -292,33 +291,27 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onSearchDB, onCreate
             </div>
           </div>
 
-          {/* FOOTER ACTIONS */}
-          <div className="lg:col-span-12 flex flex-col md:flex-row gap-5 pt-8 border-t border-slate-50">
-            <button
-              type="submit"
-              disabled={isLoading || inputMode === 'file'}
-              className="flex-1 bg-white border-2 border-sky-500 text-sky-700 hover:bg-sky-50 font-black py-5 px-8 rounded-2xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-sky-900/5 hover:translate-y-[-2px] active:scale-95"
-            >
-              {isLoading ? <Loader2 className="animate-spin" /> : <Search size={22} />}
-              <span>Tìm kiếm thư viện</span>
-            </button>
-
+          <div className="lg:col-span-12 flex flex-col pt-8 border-t border-slate-50">
             <button
               type="button"
               onClick={handleSubmitAI}
               disabled={isLoading}
-              className="flex-[1.5] bg-gradient-to-r from-sky-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-black py-5 px-8 rounded-2xl shadow-2xl shadow-sky-600/30 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-1 active:scale-95 uppercase tracking-tight"
+              className="w-full bg-gradient-to-r from-sky-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-black py-6 px-10 rounded-2xl shadow-2xl shadow-sky-600/30 transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-1 active:scale-95 uppercase tracking-tight"
             >
               {isLoading ? (
-                <Loader2 className="animate-spin" />
+                <Loader2 className="animate-spin" size={28} />
               ) : (
-                <Sparkles size={24} className="text-amber-300 drop-shadow-lg" />
+                <Sparkles size={32} className="text-amber-300 drop-shadow-lg" />
               )}
-              <span className="text-lg">{inputMode === 'file' ? 'Tạo từ file bài tập' : 'Dùng AI tạo mô phỏng'}</span>
-              <span className="px-2 py-0.5 bg-white/20 rounded-lg text-[10px] font-mono backdrop-blur-sm border border-white/10">BETA</span>
+              <span className="text-xl">{inputMode === 'file' ? 'Hiện thực hóa từ file bài tập' : 'Dùng AI tạo mô phỏng tương tác'}</span>
+              <span className="px-3 py-1 bg-white/20 rounded-lg text-xs font-mono backdrop-blur-sm border border-white/10 ml-2">VERSION 24.3</span>
             </button>
+            <p className="text-center text-slate-400 text-xs mt-4 font-bold uppercase tracking-widest">
+              Xây dựng bởi Trí tuệ nhân tạo thế hệ mới • Kết quả hiển thị ngay lập tức
+            </p>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

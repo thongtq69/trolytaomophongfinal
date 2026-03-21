@@ -42,29 +42,7 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // 1. Search in Existing Database
-  const handleSearchDB = (params: SearchParams) => {
-    setSearchParams(params);
-    setStatus('searching');
-    setDbResults([]);
-    setAiResult(null);
 
-    setTimeout(() => {
-      const normalizedQuery = params.topic.toLowerCase().trim();
-      const matches = simulationDatabase.filter(sim => {
-        if (sim.subject !== params.subject) return false;
-        const topicMatch = sim.topic.some(t => t.includes(normalizedQuery) || normalizedQuery.includes(t)) || sim.title.toLowerCase().includes(normalizedQuery);
-        return topicMatch;
-      });
-
-      if (matches.length > 0) {
-        setDbResults(matches);
-        setStatus('found');
-      } else {
-        setStatus('no-result');
-      }
-    }, 1000);
-  };
 
   // 2. Create with AI
   const handleCreateAI = async (params: SearchParams) => {
@@ -101,17 +79,20 @@ function App() {
           
           {/* Breadcrumb Section */}
           {currentView !== 'landing' && (
-            <div className="animate-blur-in flex items-center gap-3 text-xs mb-12 px-6 py-4 bg-white border border-sky-100 rounded-2xl shadow-sm w-fit group">
-              <button 
-                onClick={() => { handleViewChange('landing'); setStatus('idle'); }} 
-                className="text-slate-400 font-black hover:text-sky-600 transition-colors uppercase tracking-widest"
-              >
-                Trang chủ
-              </button>
-              <div className="size-1 rounded-full bg-slate-200"></div>
-              <span className="font-black text-sky-600 uppercase tracking-widest">
-                {currentView === 'search' ? 'Lớp học AI' : currentView === 'about' ? 'Về chúng tôi' : 'Blog'}
-              </span>
+            <div className="animate-blur-in relative mb-12 w-fit group">
+              <div className="absolute -inset-[2px] bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-400 rounded-full opacity-70 group-hover:opacity-100 transition-opacity duration-300 blur-[1px]"></div>
+              <div className="relative flex items-center gap-3 text-sm px-8 py-4 bg-white rounded-full shadow-xl">
+                <button 
+                  onClick={() => { handleViewChange('landing'); setStatus('idle'); }} 
+                  className="text-slate-500 font-black hover:text-emerald-600 transition-colors uppercase tracking-[0.15em]"
+                >
+                  Trang chủ
+                </button>
+                <div className="size-1.5 rounded-full bg-slate-300"></div>
+                <span className="font-black text-emerald-600 uppercase tracking-[0.15em]">
+                  {currentView === 'search' ? 'Tạo mô phỏng AI' : currentView === 'about' ? 'Về chúng tôi' : 'Blog'}
+                </span>
+              </div>
             </div>
           )}
 
@@ -143,7 +124,6 @@ function App() {
             <div className="animate-slide-up max-w-5xl mx-auto space-y-12">
               <SearchForm
                 isLoading={status === 'searching' || status === 'generating'}
-                onSearchDB={handleSearchDB}
                 onCreateAI={handleCreateAI}
               />
 
