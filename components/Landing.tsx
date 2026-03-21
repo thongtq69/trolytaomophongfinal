@@ -14,21 +14,21 @@ interface LandingProps {
 
 const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
   const stats = [
-    { label: 'Giáo viên sử dụng', value: '1,500+', icon: <Users size={20}/> },
-    { label: 'Công cụ AI', value: '25+', icon: <Sparkles size={20}/> },
-    { label: 'Tiết kiệm thời gian', value: '80%', icon: <Trophy size={20}/> },
-    { label: 'Mô phỏng sẵn có', value: `${simulationDatabase.length}+`, icon: <Database size={20}/> },
+    { label: 'Nền Tảng Đa Năng', value: 'AI', icon: <Sparkles size={20}/> },
+    { label: 'Chủ Đề Tiêu Biểu', value: '4+', icon: <BookOpen size={20}/> },
+    { label: 'Hiệu Quả Tối Đa', value: '80%', icon: <Trophy size={20}/> },
+    { label: 'Khối Lượng Dữ Liệu', value: `${simulationDatabase.length}+`, icon: <Database size={20}/> },
   ];
 
   return (
-    <div className="w-full bg-[#f8fafc] flex flex-col gap-24 pb-24">
+    <div className="w-full bg-[#f8fafc] flex flex-col gap-16 md:gap-20 pb-16 md:pb-20">
       
       {/* HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-8">
+      <section className="relative min-h-[78vh] w-full flex items-center justify-center pt-6 md:pt-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sky-100/50 to-transparent -z-10 rounded-l-[100px]"></div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/10 rounded-full blur-[100px] -z-10"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-sky-400/10 rounded-full blur-[100px] -z-10"></div>
         
-        <div className="section-container flex flex-col lg:flex-row items-center gap-16">
+        <div className="section-container flex flex-col lg:flex-row items-center gap-12 md:gap-14">
           <div className="flex-1 text-left space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-sky-100 text-sky-600 font-bold text-sm shadow-sm animate-bounce-slow">
               <Sparkles size={16} />
@@ -61,20 +61,6 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
                 Xem Thư Viện
               </button>
             </div>
-            
-            <div className="flex items-center gap-6 pt-4">
-              <div className="flex -space-x-3">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className={`size-12 rounded-full border-4 border-white bg-slate-200 overflow-hidden`}>
-                    <img src={`https://i.pravatar.cc/150?u=${i}`} alt="user" />
-                  </div>
-                ))}
-                <div className="size-12 rounded-full border-4 border-white bg-sky-600 text-white flex items-center justify-center text-xs font-bold">+1k</div>
-              </div>
-              <p className="text-sm font-medium text-slate-500">
-                Gia nhập cộng đồng <span className="text-slate-900 font-black">1,500+ giáo viên</span> hiện đại
-              </p>
-            </div>
           </div>
           
           <div className="flex-1 relative">
@@ -97,11 +83,11 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             
             <div className="absolute bottom-[20%] -left-4 bg-white p-4 rounded-3xl shadow-2xl border border-sky-50 flex items-center gap-3 z-20 animate-float [animation-delay:0.5s]">
               <div className="size-12 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 shadow-inner">
-                <Trophy size={24}/>
+                <Sparkles size={24}/>
               </div>
               <div>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tin dùng</div>
-                <div className="text-sm font-black text-slate-800">1,500+ Giáo viên</div>
+                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Trải Nghiệm</div>
+                <div className="text-sm font-black text-slate-800">Thân thiện, Tương tác</div>
               </div>
             </div>
           </div>
@@ -109,7 +95,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
       </section>
 
       {/* STATS */}
-      <section className="max-w-6xl mx-auto w-full px-4 -mt-12 relative z-20">
+      <section className="max-w-6xl mx-auto w-full px-4 -mt-8 md:-mt-10 relative z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 bg-white/80 backdrop-blur-xl rounded-[40px] border border-white shadow-2xl shadow-sky-900/10">
           {stats.map((stat, idx) => (
             <div key={idx} className="flex flex-col items-center text-center gap-2">
@@ -124,11 +110,15 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
       </section>
 
       {/* AI SIMULATION GENERATION FEATURE */}
-      <section id="features" className="section-container space-y-16">
+      <section id="features" className="section-container space-y-12 md:space-y-14">
         <style>{`
           @keyframes swing {
             0% { transform: rotate(25deg); }
             100% { transform: rotate(-25deg); }
+          }
+          @keyframes springStretch {
+            0%, 100% { height: 40px; }
+            50% { height: 90px; }
           }
         `}</style>
         <div className="text-center space-y-4 max-w-3xl mx-auto">
@@ -136,7 +126,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           <p className="text-slate-500 text-lg">Chỉ với những dòng mô tả đơn giản bằng tiếng Việt, trợ lý AI sẽ tự động thiết kế các mô hình ảo hoá trực quan dành riêng cho bài giảng của bạn.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-14 items-center">
           {/* Feature text & list */}
           <div className="space-y-10">
             <div className="space-y-6">
@@ -239,13 +229,13 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
         </div>
 
         {/* Integrated Gallery inside the same section */}
-        <div className="pt-8 w-full border-t border-sky-100">
-          <div className="text-center space-y-4 max-w-3xl mx-auto mb-12 pt-8">
+          <div className="pt-6 w-full border-t border-sky-100">
+          <div className="text-center space-y-4 max-w-3xl mx-auto mb-10 pt-6">
             <h3 className="text-3xl font-black text-slate-900">Và Không Giới Hạn Khả Năng Tiềm Ẩn</h3>
             <p className="text-slate-500 text-lg">Áp dụng cho mọi cấp học và lĩnh vực, từ nguyên tử vi mô đến quỹ đạo vũ trụ vĩ mô.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mx-auto grid max-w-[1560px] grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4 xl:gap-10">
           
           {/* Card 1: Physics / Optics */}
           <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all flex flex-col h-full overflow-hidden relative">
@@ -341,10 +331,125 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
               <p className="text-slate-500 text-sm leading-relaxed">Di chuyển hệ số bằng thanh trượt trực quan và chứng kiến đường cong đồ thị dịch chuyển theo thời gian thực vô cùng mượt mà.</p>
             </div>
           </div>
+
+          {/* Card 5: Physics / Pendulum */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-cyan-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               <div className="absolute inset-0 bg-gradient-to-b from-white via-cyan-50/30 to-slate-50"></div>
+               {/* Pendulum */}
+               <div className="relative z-10 flex flex-col items-center">
+                 {/* Pivot */}
+                 <div className="w-20 h-2 bg-slate-300 rounded-full shadow-sm"></div>
+                 {/* Arm + Ball */}
+                 <div className="origin-top" style={{ animation: 'swing 2s ease-in-out infinite alternate' }}>
+                   <div className="w-[3px] h-20 bg-gradient-to-b from-slate-400 to-slate-300 mx-auto rounded-full"></div>
+                   <div className="size-10 bg-gradient-to-br from-cyan-400 to-sky-600 rounded-full mx-auto -mt-1 shadow-[0_8px_30px_rgba(6,182,212,0.5)] border-2 border-white/50 flex items-center justify-center">
+                     <div className="size-4 bg-white/30 rounded-full blur-[2px]"></div>
+                   </div>
+                 </div>
+                 {/* Shadow on floor */}
+                 <div className="w-8 h-2 bg-slate-200 rounded-full blur-[3px] mt-3 opacity-60"></div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-cyan-50 text-cyan-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Vật Lý</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-cyan-600 transition-colors">Con Lắc Đơn</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Quan sát chuyển động dao động điều hoà, thay đổi chiều dài dây và góc lệch ban đầu để nghiên cứu chu kỳ và năng lượng.</p>
+            </div>
+          </div>
+
+          {/* Card 6: Astronomy / Solar System */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(15,23,42,0.95),_rgba(30,41,59,1))]"></div>
+               {/* Stars */}
+               <div className="absolute inset-0 opacity-50" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+               {/* Solar system */}
+               <div className="relative z-10 size-36 flex items-center justify-center">
+                 {/* Orbit rings */}
+                 <div className="absolute inset-[22%] rounded-full border border-white/10"></div>
+                 <div className="absolute inset-[8%] rounded-full border border-white/8"></div>
+                 <div className="absolute inset-0 rounded-full border border-white/5"></div>
+                 {/* Sun */}
+                 <div className="size-8 rounded-full bg-gradient-to-br from-amber-300 to-orange-500 shadow-[0_0_30px_rgba(251,191,36,0.7)] z-10 flex items-center justify-center">
+                   <div className="size-4 rounded-full bg-white/30 blur-[3px]"></div>
+                 </div>
+                 {/* Planet 1 - orbiting */}
+                 <div className="absolute inset-[22%] animate-[spin_4s_linear_infinite]">
+                   <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 size-3 bg-sky-400 rounded-full shadow-[0_0_10px_rgba(56,189,248,0.9)]"></div>
+                 </div>
+                 {/* Planet 2 - orbiting */}
+                 <div className="absolute inset-[8%] animate-[spin_7s_linear_infinite_reverse]">
+                   <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 size-2.5 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.9)]"></div>
+                 </div>
+                 {/* Planet 3 - orbiting */}
+                 <div className="absolute inset-0 animate-[spin_11s_linear_infinite]">
+                   <div className="absolute -top-1 left-1/2 -translate-x-1/2 size-2 bg-rose-400 rounded-full shadow-[0_0_6px_rgba(251,113,133,0.9)]"></div>
+                 </div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-amber-50 text-amber-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Thiên Văn</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-amber-600 transition-colors">Hệ Mặt Trời Thu Nhỏ</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Quan sát các hành tinh quay quanh Mặt Trời với tốc độ khác nhau, điều chỉnh quỹ đạo và vận tốc để khám phá thiên văn học.</p>
+            </div>
+          </div>
+
+          {/* Card 7: Geography / Earth Core */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-amber-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               {/* Core mockup */}
+               <div className="relative size-32 bg-red-400 rounded-full border-4 border-amber-400 shadow-[0_0_30px_rgba(251,191,36,0.5)] flex items-center justify-center overflow-hidden">
+                  <div className="absolute w-full h-1/2 bg-amber-900/20 top-0 backdrop-blur-[1px]"></div>
+                  <div className="size-20 bg-orange-400 rounded-full flex items-center justify-center animate-[pulse_3s_ease-in-out_infinite]">
+                     <div className="size-10 bg-amber-300 rounded-full flex items-center justify-center shadow-[0_0_20px_white]">
+                        <div className="size-4 bg-white/80 rounded-full blur-[1px]"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-amber-50 text-amber-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Địa Lý</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-amber-600 transition-colors">Cấu Trúc Trái Đất</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Bóc tách từng lớp vỏ, lớp manti và lõi ngoài của Trái Đất. Quan sát dòng đối lưu nhiệt dung nham vô cùng chân thực.</p>
+            </div>
+          </div>
+
+          {/* Card 8: Physics / Mechanics */}
+          <div className="group bg-white rounded-[32px] p-6 border border-sky-50 shadow-sm hover:shadow-2xl hover:shadow-violet-900/10 transition-all flex flex-col h-full overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 rounded-full blur-3xl group-hover:bg-violet-500/20 transition-colors"></div>
+            <div className="h-48 bg-slate-50 rounded-2xl mb-6 relative overflow-hidden flex items-center justify-center border border-slate-100">
+               {/* Spring mockup */}
+               <div className="flex flex-col items-center mt-[-30px]">
+                  <div className="w-16 h-2 bg-slate-300 rounded-full"></div>
+                  {/* CSS Spring */}
+                  <div className="w-8 relative flex flex-col overflow-hidden" style={{ animation: 'springStretch 2s ease-in-out infinite' }}>
+                    <div className="w-[2px] h-full bg-slate-400 mx-auto opacity-30 absolute left-1/2 -translate-x-1/2"></div>
+                    <div className="w-full h-full flex flex-col justify-around py-1">
+                      {[1,2,3,4].map(i => (
+                        <div key={i} className="w-full h-[4px] bg-slate-400 rotate-[-15deg] rounded-full my-0.5 shadow-sm"></div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* CSS Weight */}
+                  <div className="size-10 bg-violet-500 rounded-xl shadow-lg border-2 border-white flex items-center justify-center relative z-10 shadow-violet-500/40">
+                     <div className="w-4 h-1 bg-white/50 rounded-full"></div>
+                  </div>
+               </div>
+            </div>
+            <div className="space-y-2 flex-grow">
+              <div className="inline-block px-3 py-1 bg-violet-50 text-violet-600 font-bold text-[10px] uppercase tracking-widest rounded-full mb-2">Vật Lý</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-violet-600 transition-colors">Con Lắc Lò Xo</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">Thay đổi độ cứng tĩnh, xem các yếu tố lực ma sát và trọng lượng tác động lên dao động điều hoà.</p>
+            </div>
+          </div>
         </div>
         </div>
 
-        <div className="text-center pt-8">
+        <div className="text-center pt-4 md:pt-6">
           <button 
             onClick={() => onViewChange('library')}
             className="btn-secondary py-5 px-12 group mx-auto inline-flex"
@@ -443,7 +548,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             <div className="relative z-10 space-y-6">
                 <h2 className="text-4xl md:text-5xl font-black text-white leading-tight max-w-3xl mx-auto">Sẵn Sàng Thay Đổi Cách Bạn Giảng Dạy Mãi Mãi?</h2>
                 <p className="text-sky-100 text-lg md:text-xl font-medium max-w-2xl mx-auto opacity-90">
-                    Gia nhập cùng 1,500+ giáo viên hiện đại đang sử dụng Trợ lý AI để mỗi tiết học trở thành một trải nghiệm thú vị.
+                    Sử dụng nền tảng Trợ lý AI để tự do sáng tạo ra các bài giảng sinh động và biến mỗi không gian lớp học thành một trải nghiệm thú vị.
                 </p>
             </div>
             

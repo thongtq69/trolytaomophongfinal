@@ -1,7 +1,11 @@
 import React from 'react';
 import { Microscope, Facebook, Twitter, Mail, ChevronRight, Globe2, Sparkles } from 'lucide-react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onGoToSearch: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onGoToSearch }) => {
   return (
     <footer className="bg-slate-900 pt-20 pb-10 px-4 mt-auto no-print text-white overflow-hidden relative">
       <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]"></div>
@@ -65,10 +69,13 @@ const Footer: React.FC = () => {
             <p className="text-sky-200/60 text-sm leading-relaxed">
               Thiết lập API Key trong phần cài đặt và bắt đầu tạo mô phỏng AI trực tiếp ngay trên hệ thống.
             </p>
-            <div className="inline-flex items-center gap-2 px-6 py-4 bg-white/10 text-white font-black rounded-2xl border border-white/10 w-full justify-center">
-              MỞ CÀI ĐẶT ĐỂ BẮT ĐẦU
+            <button
+              onClick={onGoToSearch}
+              className="inline-flex items-center gap-2 px-6 py-4 bg-white/10 hover:bg-white/15 text-white font-black rounded-2xl border border-white/10 w-full justify-center transition-all"
+            >
+              ĐI TỚI TẠO MÔ PHỎNG
               <ArrowRight size={20} />
-            </div>
+            </button>
           </div>
         </div>
 

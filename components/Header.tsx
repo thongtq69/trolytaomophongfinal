@@ -8,7 +8,6 @@ interface HeaderProps {
   onViewChange: (view: 'landing' | 'search' | 'library' | 'about' | 'blog') => void;
 }
 
-const BASE_VISIT_COUNT = 1326;
 const VISIT_COUNT_KEY = 'app_visit_count';
 
 const NAV_ITEMS = [
@@ -57,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
 
   return (
     <header className="sticky top-0 z-[100] w-full bg-white/70 backdrop-blur-xl border-b border-sky-100 px-4 md:px-10 py-3 transition-all">
-      <div className="max-w-[1600px] mx-auto flex items-center justify-between gap-3">
+      <div className="max-w-7xl w-full mx-auto flex items-center justify-between gap-3">
         <div
           className="flex min-w-0 items-center gap-3 cursor-pointer group"
           onClick={() => onViewChange('landing')}
@@ -93,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
           <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-sky-50 border border-sky-100 rounded-2xl shadow-sm">
             <Eye size={18} className="text-sky-600" />
             <span className="text-sm font-black text-sky-700">
-              {(BASE_VISIT_COUNT + visitCount).toLocaleString('vi-VN')}
+              {visitCount.toLocaleString('vi-VN')}
             </span>
             <span className="text-xs text-sky-600/60 font-medium">truy cập</span>
           </div>
@@ -124,7 +123,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
       </div>
 
       {isMobileMenuOpen && (
-        <div className="lg:hidden max-w-[1600px] mx-auto mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden max-w-7xl w-full mx-auto mt-3 animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="rounded-3xl border border-sky-100 bg-white/95 p-3 shadow-2xl shadow-sky-100/60 backdrop-blur-xl">
             <nav className="flex flex-col gap-2">
               {NAV_ITEMS.map(item => (
@@ -147,7 +146,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
             <div className="mt-3 flex items-center justify-between rounded-2xl bg-slate-50 px-4 py-3 sm:hidden">
               <div className="flex items-center gap-2 text-sky-700">
                 <Eye size={16} />
-                <span className="text-sm font-black">{(BASE_VISIT_COUNT + visitCount).toLocaleString('vi-VN')}</span>
+                <span className="text-sm font-black">{visitCount.toLocaleString('vi-VN')}</span>
               </div>
               <span className="text-xs font-semibold text-slate-500">lượt truy cập</span>
             </div>

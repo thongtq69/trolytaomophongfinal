@@ -35,6 +35,27 @@
       background: rgba(166, 222, 175, 0.8);
     }
   </style>
+
+  <style type="text/tailwindcss">
+    @layer components {
+      .btn-primary {
+        @apply bg-sky-600 hover:bg-sky-700 text-white font-black py-5 px-10 rounded-3xl shadow-2xl shadow-sky-600/30 transition-all active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-3;
+      }
+      .btn-secondary {
+        @apply bg-white hover:bg-sky-50 text-sky-600 font-black py-5 px-10 rounded-3xl shadow-xl border-2 border-sky-100 transition-all active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-3;
+      }
+      .glass-card {
+        @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-2xl;
+      }
+      .section-container {
+        @apply w-full max-w-7xl mx-auto px-4 md:px-8 py-24;
+      }
+      .heading-xl {
+        @apply text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] mb-8;
+      }
+    }
+  </style>
+
   <script>
     tailwind.config = {
       theme: {

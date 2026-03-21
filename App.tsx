@@ -28,6 +28,12 @@ function App() {
   const [searchParams, setSearchParams] = useState<SearchParams | null>(null);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
 
+  const handleGoToSearch = () => {
+    setCurrentView('search');
+    setStatus('idle');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // 1. Search in Existing Database
   const handleSearchDB = (params: SearchParams) => {
     setSearchParams(params);
@@ -75,15 +81,15 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-slate-50 selection:bg-sky-100 selection:text-sky-900">
+    <div className="min-h-screen flex flex-col font-sans bg-slate-50 selection:bg-sky-100 selection:text-sky-900 overflow-x-hidden">
       <Header
         onOpenGuide={() => setIsGuideOpen(true)}
         currentView={currentView}
         onViewChange={setCurrentView}
       />
 
-      <main className="flex-1">
-        <div className="section-container">
+      <main className="flex-1 w-full">
+        <div className={currentView === 'landing' ? "w-full" : "section-container"}>
           
           {/* Breadcrumb Section */}
           {currentView !== 'landing' && (
@@ -246,7 +252,7 @@ function App() {
         </div>
       </main>
 
-      <Footer />
+      <Footer onGoToSearch={handleGoToSearch} />
 
       <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
       <SettingsModal />
