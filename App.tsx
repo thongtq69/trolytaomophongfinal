@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import SearchForm from './components/SearchForm';
 import ResultFound from './components/ResultFound';
 import ResultGenerated from './components/ResultGenerated';
-import LibraryView from './components/LibraryView';
+
 import GuideModal from './components/GuideModal';
 import Landing from './components/Landing';
 import About from './components/About';
@@ -17,7 +17,7 @@ import { Loader2, AlertCircle, Database, SearchX, ArrowRight, Sparkles } from 'l
 import SettingsModal from './components/SettingsModal';
 import { useSettings } from './contexts/SettingsContext';
 
-type ViewState = 'landing' | 'search' | 'library' | 'about' | 'blog';
+type ViewState = 'landing' | 'search' | 'about' | 'blog';
 
 function App() {
   const { apiKey, selectedModel, setIsSettingsOpen } = useSettings();
@@ -110,7 +110,7 @@ function App() {
               </button>
               <div className="size-1 rounded-full bg-slate-200"></div>
               <span className="font-black text-sky-600 uppercase tracking-widest">
-                {currentView === 'search' ? 'Lớp học AI' : currentView === 'library' ? 'Thư viện tài nguyên' : currentView === 'about' ? 'Về chúng tôi' : 'Blog'}
+                {currentView === 'search' ? 'Lớp học AI' : currentView === 'about' ? 'Về chúng tôi' : 'Blog'}
               </span>
             </div>
           )}
@@ -122,12 +122,7 @@ function App() {
             </div>
           )}
 
-          {/* VIEW: LIBRARY */}
-          {currentView === 'library' && (
-            <div className="animate-blur-in">
-              <LibraryView />
-            </div>
-          )}
+
 
           {/* VIEW: ABOUT */}
           {currentView === 'about' && (

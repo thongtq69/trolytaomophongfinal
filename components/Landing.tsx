@@ -9,7 +9,7 @@ import {
 import { simulationDatabase } from '../services/simulationData';
 
 interface LandingProps {
-  onViewChange: (view: 'landing' | 'search' | 'library') => void;
+  onViewChange: (view: 'landing' | 'search') => void;
 }
 
 const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
@@ -63,11 +63,11 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
                 <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
               </button>
               <button 
-                onClick={() => onViewChange('library')}
+                onClick={() => onViewChange('search')}
                 className="btn-secondary py-5 px-10 text-lg group"
               >
                 <MonitorPlay size={22} />
-                Xem Thư Viện
+                Xem Demo
               </button>
             </div>
           </div>
@@ -460,10 +460,10 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
 
         <div className="text-center pt-4 md:pt-6">
           <button 
-            onClick={() => onViewChange('library')}
+            onClick={() => onViewChange('search')}
             className="btn-secondary py-5 px-12 group mx-auto inline-flex"
           >
-            Khám phá 2,500+ mô phỏng khác
+            Tự tạo mô phỏng của bạn
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

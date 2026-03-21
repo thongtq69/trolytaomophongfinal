@@ -4,15 +4,14 @@ import { useSettings } from '../contexts/SettingsContext';
 
 interface HeaderProps {
   onOpenGuide: () => void;
-  currentView: 'landing' | 'search' | 'library' | 'about' | 'blog';
-  onViewChange: (view: 'landing' | 'search' | 'library' | 'about' | 'blog') => void;
+  currentView: 'landing' | 'search' | 'about' | 'blog';
+  onViewChange: (view: 'landing' | 'search' | 'about' | 'blog') => void;
 }
 
 const VISIT_COUNT_KEY = 'app_visit_count';
 
 const NAV_ITEMS = [
   { key: 'landing', label: 'Trang chủ' },
-  { key: 'library', label: 'Thư viện' },
   { key: 'search', label: 'Tạo mô phỏng' },
   { key: 'about', label: 'Về chúng tôi' },
   { key: 'blog', label: 'Blog' },
