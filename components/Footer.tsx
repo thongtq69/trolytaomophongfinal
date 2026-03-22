@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ onGoToSearch }) => {
                 <Microscope size={28} strokeWidth={2.5} />
               </div>
               <div>
-                <h2 className="text-2xl font-black leading-none tracking-tight text-white mb-1">TRỢ LÝ MÔ PHỎNG</h2>
+                <h2 className="text-2xl font-black leading-none tracking-tight text-white mb-1 uppercase">Simulab</h2>
                 <p className="text-[10px] font-bold text-sky-400 uppercase tracking-[0.2em]">Kỷ nguyên AI Giáo dục</p>
               </div>
             </div>
@@ -81,7 +81,7 @@ const Footer: React.FC<FooterProps> = ({ onGoToSearch }) => {
 
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-slate-500 text-xs font-bold uppercase tracking-widest">
-          <p>© 2026 TRỢ LÝ MÔ PHỎNG AI. PHÁT TRIỂN BỞI THẦY NGUYỄN MINH HIẾU.</p>
+          <p>© 2026 SIMULAB AI. PHÁT TRIỂN BỞI THẦY NGUYỄN MINH HIẾU.</p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">Điều khoản sử dụng</a>
             <a href="#" className="hover:text-white transition-colors">Chính sách bảo mật</a>

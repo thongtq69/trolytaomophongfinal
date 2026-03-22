@@ -64,8 +64,8 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
             <Microscope size={24} strokeWidth={2.5} />
           </div>
           <div className="flex min-w-0 flex-col">
-            <h1 className="truncate text-lg sm:text-xl font-black leading-none tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">TRỢ LÝ MÔ PHỎNG</h1>
-            <p className="text-[11px] font-bold text-sky-700/81 uppercase tracking-[0.14em] hidden sm:block">PHÁT TRIỂN BỞI THẦY NGUYỄN MINH HIẾU</p>
+            <h1 className="truncate text-xl sm:text-2xl font-black leading-none tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors uppercase">Simulab</h1>
+            <p className="text-[11px] font-bold text-sky-700/81 uppercase tracking-[0.14em] hidden sm:block">Nền tảng mô phỏng AI</p>
           </div>
         </div>
 

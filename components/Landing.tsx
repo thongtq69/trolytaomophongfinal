@@ -44,13 +44,13 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
               <span>Nền tảng AI Giáo dục hàng đầu Việt Nam</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight">
+            <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.05] tracking-tight">
               Giảng dạy sáng tạo <br/>
-              với <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">Trợ lý AI</span> <br/>
+              với <span className="header-gradient">Simulab AI</span> <br/>
               thế hệ mới
             </h1>
             
-            <p className="text-xl text-slate-600 leading-relaxed max-w-xl">
+            <p className="text-xl text-slate-600 leading-relaxed max-w-xl font-medium">
               Giúp giáo viên tiết kiệm hàng giờ soạn giáo án, tạo đề thi và mô phỏng tương tác chỉ trong vài giây với công nghệ AI tiên tiến.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
@@ -96,15 +96,15 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
       </section>
 
       {/* STATS */}
-      <section className="max-w-6xl mx-auto w-full px-4 -mt-8 md:-mt-10 relative z-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 bg-white/80 backdrop-blur-xl rounded-[40px] border border-white shadow-2xl shadow-sky-900/10">
+      <section className="max-w-6xl mx-auto w-full px-4 -mt-12 md:-mt-16 relative z-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 p-10 bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] rounded-[48px] border border-slate-100 backdrop-blur-3xl">
           {stats.map((stat, idx) => (
-            <div key={idx} className="flex flex-col items-center text-center gap-2">
-              <div className="size-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-1">
+            <div key={idx} className="flex flex-col items-center text-center gap-3">
+              <div className="size-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center shadow-inner">
                 {stat.icon}
               </div>
-              <div className="text-3xl font-black text-slate-900">{stat.value}</div>
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
+              <div className="text-4xl font-black text-slate-900 tracking-tight">{stat.value}</div>
+              <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -123,8 +123,8 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           }
         `}</style>
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">Biến Ý Tưởng Thành Mô Phỏng Tương Tác</h2>
-          <p className="text-slate-500 text-lg">Chỉ với những dòng mô tả đơn giản bằng tiếng Việt, trợ lý AI sẽ tự động thiết kế các mô hình ảo hoá trực quan dành riêng cho bài giảng của bạn.</p>
+          <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-tight tracking-tighter">Biến Ý Tưởng Thành <br/><span className="header-gradient">Mô Phỏng Tương Tác</span></h2>
+          <p className="text-slate-500 text-xl font-medium">Chỉ với những dòng mô tả đơn giản bằng tiếng Việt, Simulab AI sẽ tự động thiết kế các mô hình ảo hoá trực quan dành riêng cho bài giảng của bạn.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-14 items-center">
@@ -135,7 +135,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
                 <Sparkles size={16} />
                 <span>Hoàn Toàn Tự Động</span>
               </div>
-              <h3 className="text-3xl font-black text-slate-900">Xây dựng thế giới trực quan với Trợ Lý AI</h3>
+              <h3 className="text-3xl font-black text-slate-900">Xây dựng thế giới trực quan với Simulab AI</h3>
               <p className="text-slate-600 leading-relaxed text-lg">
                 Chỉ cần đóng vai người đạo diễn và đưa ra ý tưởng. Hệ thống trí tuệ nhân tạo sẽ tự động xây dựng bối cảnh và tương tác trong vài giây, tái hiện các hiện tượng Vật lý, phản ứng Hoá học hay Toán học một cách chân thực nhất để giảng dạy.
               </p>
@@ -478,7 +478,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-300">Kỷ nguyên AI</span>
             </h2>
             <p className="text-sky-100/70 text-lg leading-relaxed font-medium">
-              Tôi phát triển các công cụ này với tâm huyết giúp đồng nghiệp giáo viên Việt Nam không bị bỏ lại phía sau. Ứng dụng AI không chỉ là tiết kiệm thời gian, mà là thay đổi cách chúng ta truyền cảm hứng cho học sinh thông qua các tài liệu học tập sinh động và hiện đại.
+              Trong kỷ nguyên số, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi dậy niềm đam mê học hỏi. Simulab ra đời với mong muốn cung cấp các công cụ mô phỏng trực quan, sinh động, giúp tiết học trở nên thú vị hơn bao giờ hết.
             </p>
             <div className="space-y-5">
               {[
@@ -518,9 +518,9 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           <div className="hidden md:block absolute top-[40%] left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-sky-100 to-transparent -z-10"></div>
           
           {[
-            { step: '01', title: 'Chọn Công Cụ', desc: 'Duyệt qua kho công cụ AI đa dạng và chọn chức năng bạn cần.', icon: <Search size={28}/> },
-            { step: '02', title: 'Nhập Nội Dung', desc: 'Mô tả ngắn gọn yêu cầu hoặc tải tài liệu lên để AI xử lý.', icon: <Sparkles size={28}/> },
-            { step: '03', title: 'Nhận Kết Quả', desc: 'AI trả về cảnh quan 3D hoặc mô phỏng tương tác. Lưu lại và sử dụng ngay!', icon: <ArrowRight size={28}/> },
+            { step: '01', title: 'Chọn Công Cụ', desc: 'Duyệt qua kho công cụ Simulab đa dạng và chọn chức năng bạn cần.', icon: <Search size={28}/> },
+            { step: '02', title: 'Nhập Nội Dung', desc: 'Mô tả ngắn gọn yêu cầu hoặc tải tài liệu lên để Simulab xử lý.', icon: <Sparkles size={28}/> },
+            { step: '03', title: 'Nhận Kết Quả', desc: 'Simulab trả về cảnh quan 3D hoặc mô phỏng tương tác. Lưu lại và sử dụng ngay!', icon: <ArrowRight size={28}/> },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center gap-8 group">
               <div className="size-24 bg-white shadow-2xl shadow-sky-600/10 rounded-[32px] border border-sky-50 flex items-center justify-center relative transition-transform group-hover:-translate-y-2">
@@ -549,7 +549,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             <div className="relative z-10 space-y-6">
                 <h2 className="text-4xl md:text-5xl font-black text-white leading-tight max-w-3xl mx-auto">Sẵn Sàng Thay Đổi Cách Bạn Giảng Dạy Mãi Mãi?</h2>
                 <p className="text-sky-100 text-lg md:text-xl font-medium max-w-2xl mx-auto opacity-90">
-                    Sử dụng nền tảng Trợ lý AI để tự do sáng tạo ra các bài giảng sinh động và biến mỗi không gian lớp học thành một trải nghiệm thú vị.
+                    Sử dụng nền tảng Simulab để tự do sáng tạo ra các bài giảng sinh động và biến mỗi không gian lớp học thành một trải nghiệm thú vị.
                 </p>
             </div>
             

@@ -158,7 +158,7 @@ function App() {
                         </div>
                         <h2 className="text-4xl font-black bg-gradient-to-r from-sky-600 to-indigo-700 bg-clip-text text-transparent uppercase tracking-tighter mb-4">AI Đang sáng tạo...</h2>
                         <p className="text-slate-500 font-black max-w-md mx-auto leading-relaxed mb-12">
-                          Vui lòng đợi trong giây lát, trợ lý AI đang lập trình mã nguồn HTML5 tương tác cho chủ đề <span className="text-sky-600 underline">"{searchParams?.topic}"</span>.
+                          Vui lòng đợi trong giây lát, Simulab AI đang lập trình mã nguồn HTML5 tương tác cho chủ đề <span className="text-sky-600 underline">"{searchParams?.topic}"</span>.
                         </p>
                         
                         <div className="w-full max-w-sm bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-white shadow-inner relative">

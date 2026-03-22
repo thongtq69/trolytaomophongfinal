@@ -1,5 +1,5 @@
 {
-  "name": "SimFinder AI VER 2",
-  "description": "Trợ lý tìm kiếm và tạo mô phỏng giáo dục cho giáo viên Việt Nam. Tìm mô phỏng có sẵn hoặc tạo mới bằng AI trong vài giây.",
+  "name": "Simulab",
+  "description": "Nền tảng tìm kiếm và tạo mô phỏng giáo dục AI dành cho giáo viên Việt Nam. Tìm mô phỏng có sẵn hoặc tạo mới bằng AI trong vài giây.",
   "requestFramePermissions": []
 }

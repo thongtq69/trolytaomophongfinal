@@ -18,7 +18,7 @@ const About: React.FC = () => {
         <div className="space-y-8">
           <h2 className="text-4xl font-black text-slate-900 tracking-tight">Sứ Mệnh Của Chúng Tôi</h2>
           <p className="text-lg text-slate-600 leading-relaxed">
-            Trong kỷ nguyên số, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi dậy niềm đam mê học hỏi. Trợ Lý Mô Phỏng ra đời với mong muốn cung cấp các công cụ mô phỏng trực quan, sinh động, giúp tiết học trở nên thú vị hơn bao giờ hết.
+            Trong kỷ nguyên số, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi dậy niềm đam mê học hỏi. Simulab ra đời với mong muốn cung cấp các công cụ mô phỏng trực quan, sinh động, giúp tiết học trở nên thú vị hơn bao giờ hết.
           </p>
           <ul className="space-y-4">
             {[

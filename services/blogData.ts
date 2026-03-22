@@ -58,7 +58,7 @@ export const blogPosts: BlogPost[] = [
       <h2>2. Labster</h2>
       <p>Labster cung cấp trải nghiệm phòng lab 3D vô cùng đẳng cấp. Học sinh thực sự đóng vai nhà khoa học đeo găng tay, sử dụng ống nghiệm, trích xuất DNA trên môi trường ảo. Tuy nhiên, rào cản lớn nhất là chi phí bản quyền khá đắt đỏ đối với các trường phổ thông.</p>
 
-      <h2>3. Nền tảng "Trợ lý ảo & Mô phỏng tự động" (Sản phẩm Nội địa mới)</h2>
+      <h2>3. Nền tảng "Simulab" (Sản phẩm Nội địa mới)</h2>
       <p>Đây là giải pháp đột phá nhất kết hợp sức mạnh của Generative AI và HTML5 Canvas/WebGL. Thay vì tìm kiếm mô hình sẵn có, giáo viên chỉ cần ra lệnh: <em>"Vẽ cho tôi mô phỏng hiện tượng khúc xạ ánh sáng qua lăng kính"</em>. Tức thời, một mã nguồn React/HTML sẽ được sinh ra trực tiếp trên trình duyệt, có sẵn thanh trượt để học sinh thay đổi góc tới và chiết suất vật liệu.</p>
       
       <h3>Điểm sáng của công cụ này:</h3>
@@ -96,7 +96,7 @@ export const blogPosts: BlogPost[] = [
       <p>Đừng bảo AI: "Hãy làm cho tôi một trò chơi". Hãy nói: <em>"Bạn là một lập trình viên React xuất sắc. Hãy viết cho tôi mã nguồn một trò chơi ghép hình (Match-Card game) chủ đề <strong>Các di tích lịch sử Hà Nội</strong>. Trò chơi có 6 cặp thẻ. Khi học sinh lật đúng cặp thẻ, hãy hiển thị hiệu ứng pháo hoa bắn lên và 1 câu giới thiệu ngắn về di tích đó (ví dụ: Lăng Bác, Hồ Gươm, Văn Miếu). Cung cấp mã nguồn bằng Tailwind CSS để giao diện đẹp mắt."</em></p>
 
       <h3>Bước 2: Review và chạy thử (Run Code)</h3>
-      <p>Nếu bạn đang sử dụng nền tảng <b>Trợ lý AI của chúng tôi</b>, mã nguồn sẽ ngay lập tức được biên dịch và hiển thị ngay trên màn hình dưới dạng Live Preview (Xem trước). Bạn có thể bấm lật thử các thẻ bài.</p>
+      <p>Nếu bạn đang sử dụng nền tảng <b>Simulab AI</b>, mã nguồn sẽ ngay lập tức được biên dịch và hiển thị ngay trên màn hình dưới dạng Live Preview (Xem trước). Bạn có thể bấm lật thử các thẻ bài.</p>
 
       <h3>Bước 3: Tinh chỉnh bằng "Khẩu ngữ"</h3>
       <p>Trò chơi đang quá khó? Giao diện đang quá trầm? Đừng tốn công lần mò mã màu CSS! Bạn chỉ cần gõ tiếp vào khung chat:</p>
