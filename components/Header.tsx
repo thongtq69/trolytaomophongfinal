@@ -60,12 +60,12 @@ const Header: React.FC<HeaderProps> = ({ onOpenGuide, currentView, onViewChange 
           className="flex min-w-0 items-center gap-3 cursor-pointer group"
           onClick={() => onViewChange('landing')}
         >
-          <div className="bg-sky-600 font-bold text-white p-2.5 rounded-2xl flex items-center justify-center shadow-xl shadow-sky-600/20 group-hover:bg-sky-700 transition-all group-hover:scale-110">
+          <div className="bg-[#439352] font-bold text-white p-2.5 rounded-2xl flex items-center justify-center shadow-xl shadow-green-600/20 group-hover:bg-[#347240] transition-all group-hover:scale-110">
             <Microscope size={24} strokeWidth={2.5} />
           </div>
           <div className="flex min-w-0 flex-col">
-            <h1 className="truncate text-xl sm:text-2xl font-black leading-none tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors uppercase">Simulab</h1>
-            <p className="text-[11px] font-bold text-sky-700/81 uppercase tracking-[0.14em] hidden sm:block">Nền tảng mô phỏng AI</p>
+            <h1 className="truncate text-xl sm:text-2xl font-black leading-none tracking-tight text-[#439352] group-hover:text-[#347240] transition-colors uppercase">Simulab</h1>
+            <p className="text-[11px] font-bold text-[#0d2a13]/80 uppercase tracking-[0.14em] hidden sm:block">NỀN TẢNG MÔ PHỎNG AI</p>
           </div>
         </div>
 
