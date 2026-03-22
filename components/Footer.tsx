@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ onGoToSearch }) => {
                 <Microscope size={28} strokeWidth={2.5} />
               </div>
               <div>
-                <h2 className="text-2xl font-black leading-none tracking-tight text-white mb-1 uppercase">Simulab</h2>
+                <h2 className="text-2xl font-black leading-none tracking-tight text-white mb-1 uppercase">Simulab AI</h2>
                 <p className="text-[10px] font-bold text-sky-400 uppercase tracking-[0.2em]">Kỷ nguyên AI Giáo dục</p>
               </div>
             </div>

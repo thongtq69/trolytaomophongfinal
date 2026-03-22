@@ -478,7 +478,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-300">Kỷ nguyên AI</span>
             </h2>
             <p className="text-sky-100/70 text-lg leading-relaxed font-medium">
-              Trong kỷ nguyên số, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi dậy niềm đam mê học hỏi. Simulab ra đời với mong muốn cung cấp các công cụ mô phỏng trực quan, sinh động, giúp tiết học trở nên thú vị hơn bao giờ hết.
+              Trong kỷ nguyên số, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi dậy niềm đam mê học hỏi. Simulab AI ra đời với mong muốn cung cấp các công cụ mô phỏng trực quan, sinh động, giúp tiết học trở nên thú vị hơn bao giờ hết.
             </p>
             <div className="space-y-5">
               {[
@@ -518,9 +518,9 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
           <div className="hidden md:block absolute top-[40%] left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-sky-100 to-transparent -z-10"></div>
           
           {[
-            { step: '01', title: 'Chọn Công Cụ', desc: 'Duyệt qua kho công cụ Simulab đa dạng và chọn chức năng bạn cần.', icon: <Search size={28}/> },
-            { step: '02', title: 'Nhập Nội Dung', desc: 'Mô tả ngắn gọn yêu cầu hoặc tải tài liệu lên để Simulab xử lý.', icon: <Sparkles size={28}/> },
-            { step: '03', title: 'Nhận Kết Quả', desc: 'Simulab trả về cảnh quan 3D hoặc mô phỏng tương tác. Lưu lại và sử dụng ngay!', icon: <ArrowRight size={28}/> },
+            { step: '01', title: 'Chọn Công Cụ', desc: 'Duyệt qua kho công cụ Simulab AI đa dạng và chọn chức năng bạn cần.', icon: <Search size={28}/> },
+            { step: '02', title: 'Nhập Nội Dung', desc: 'Mô tả ngắn gọn yêu cầu hoặc tải tài liệu lên để Simulab AI xử lý.', icon: <Sparkles size={28}/> },
+            { step: '03', title: 'Nhận Kết Quả', desc: 'Simulab AI trả về cảnh quan 3D hoặc mô phỏng tương tác. Lưu lại và sử dụng ngay!', icon: <ArrowRight size={28}/> },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center gap-8 group">
               <div className="size-24 bg-white shadow-2xl shadow-sky-600/10 rounded-[32px] border border-sky-50 flex items-center justify-center relative transition-transform group-hover:-translate-y-2">
@@ -549,7 +549,7 @@ const Landing: React.FC<LandingProps> = ({ onViewChange }) => {
             <div className="relative z-10 space-y-6">
                 <h2 className="text-4xl md:text-5xl font-black text-white leading-tight max-w-3xl mx-auto">Sẵn Sàng Thay Đổi Cách Bạn Giảng Dạy Mãi Mãi?</h2>
                 <p className="text-sky-100 text-lg md:text-xl font-medium max-w-2xl mx-auto opacity-90">
-                    Sử dụng nền tảng Simulab để tự do sáng tạo ra các bài giảng sinh động và biến mỗi không gian lớp học thành một trải nghiệm thú vị.
+                    Sử dụng nền tảng Simulab AI để tự do sáng tạo ra các bài giảng sinh động và biến mỗi không gian lớp học thành một trải nghiệm thú vị.
                 </p>
             </div>
             
