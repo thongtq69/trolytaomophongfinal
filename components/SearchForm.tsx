@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Sparkles, Settings, Monitor, Loader2, FlaskConical, Atom, Dna, Calculator, Check, Upload, FileText, Zap, BookOpen } from 'lucide-react';
-import { SUBJECTS, GRADES, DEVICE_OPTIONS, SearchParams, UploadedFile } from '../types';
+import { SUBJECTS, GRADES, SearchParams, UploadedFile } from '../types';
 import FileUploader from './FileUploader';
 
 interface SearchFormProps {
@@ -19,24 +19,14 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onCreateAI }) => {
     topic: '',
     grade: GRADES[7],
     parameters: '',
-    expectedResult: '',
-    devices: []
+    expectedResult: ''
   });
 
   const handleInputChange = (field: keyof SearchParams, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleDeviceChange = (deviceId: string) => {
-    setFormData(prev => {
-      const current = prev.devices;
-      if (current.includes(deviceId)) {
-        return { ...prev, devices: current.filter(d => d !== deviceId) };
-      } else {
-        return { ...prev, devices: [...current, deviceId] };
-      }
-    });
-  };
+
 
 
 
@@ -247,47 +237,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onCreateAI }) => {
                 />
               </label>
 
-              <div>
-                <span className="text-xs font-bold text-slate-500 uppercase block mb-3">Thiết bị hiển thị</span>
-                <div className="grid grid-cols-2 gap-2">
-                  {DEVICE_OPTIONS.slice(0, 4).map((device, idx) => {
-                    const colors = [
-                      'from-blue-500 to-cyan-500',
-                      'from-pink-500 to-rose-500',
-                      'from-amber-500 to-orange-500',
-                      'from-green-500 to-emerald-500'
-                    ];
-                    const isSelected = formData.devices.includes(device.label);
 
-                    return (
-                      <label
-                        key={device.id}
-                        className={`
-                          flex items-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all duration-200
-                          ${isSelected
-                            ? `bg-gradient-to-r ${colors[idx]} text-white border-transparent shadow-md`
-                            : 'bg-white border-2 border-slate-300 text-slate-600 hover:border-slate-400 hover:shadow-sm'
-                          }
-                        `}
-                      >
-                        <div className={`
-                          size-5 rounded-md flex items-center justify-center transition-all
-                          ${isSelected ? 'bg-white/30' : 'border-2 border-slate-300'}
-                        `}>
-                          {isSelected && <Check size={14} className="text-white" strokeWidth={3} />}
-                        </div>
-                        <input
-                          type="checkbox"
-                          className="hidden"
-                          checked={isSelected}
-                          onChange={() => handleDeviceChange(device.label)}
-                        />
-                        <span className="text-xs font-bold">{device.label}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
             </div>
           </div>
 

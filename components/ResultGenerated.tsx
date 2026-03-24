@@ -32,33 +32,68 @@ const ResultGenerated: React.FC<ResultGeneratedProps> = ({ data, topic }) => {
   return (
     <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       
-      {/* Success Banner */}
-      <div className="bg-gradient-to-r from-sky-600 to-indigo-700 rounded-3xl p-8 text-white shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-white/20 rounded-xl backdrop-blur-md">
-              <Sparkles size={24} className="text-amber-300" />
+      {/* Redesigned Success Banner */}
+      <div className="relative group overflow-hidden rounded-[40px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)]">
+        {/* Multilayered Dynamic Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1e40af] via-[#0369a1] to-[#0d9488] transition-all duration-700 group-hover:scale-110"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-400/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse-slow"></div>
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-400/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
+        
+        {/* Content Wrapper */}
+        <div className="relative z-10 px-10 py-12 flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-white/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative p-5 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl flex items-center justify-center translate-y-0 group-hover:-translate-y-2 transition-transform duration-500">
+                <Sparkles size={40} className="text-amber-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]" strokeWidth={2.5} />
+              </div>
             </div>
-            <h2 className="font-black text-2xl tracking-tight uppercase">Mô phỏng AI đã sẵn sàng!</h2>
+            
+            <div className="space-y-2">
+              <div className="flex items-center gap-3 justify-center md:justify-start">
+                <h2 className="font-black text-3xl md:text-4xl tracking-tight text-white uppercase drop-shadow-md">
+                  Mô phỏng AI đã sẵn sàng!
+                </h2>
+                <div className="px-3 py-1 bg-emerald-500 text-white text-[10px] font-black rounded-full shadow-lg shadow-emerald-500/40 animate-bounce-slow uppercase tracking-tighter self-start mt-1">
+                  NEW
+                </div>
+              </div>
+              <p className="text-sky-100 font-bold text-lg md:text-xl opacity-90 max-w-2xl leading-relaxed">
+                Hệ thống đã khởi tạo thành công mô hình học tập tương tác chủ đề <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-400 font-black italic">"{topic}"</span>
+              </p>
+            </div>
           </div>
-          <p className="text-sky-50 font-medium text-sm opacity-90">Hệ thống đã khởi tạo thành công mô hình tương tác cho chủ đề <span className="underline decoration-amber-300/50 underline-offset-4">"{topic}"</span>.</p>
-        </div>
-        <div className="flex gap-3 relative z-10">
-          <button 
-            onClick={handleDownload}
-            className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-3.5 rounded-2xl text-xs font-black flex items-center gap-2 hover:bg-white/20 transition-all uppercase tracking-widest"
-          >
-            <Download size={18} />
-            Tải HTML
-          </button>
-          <button 
-            onClick={handleCopy}
-            className="bg-white text-sky-700 px-6 py-3.5 rounded-2xl text-xs font-black flex items-center gap-2 hover:bg-sky-50 transition-all uppercase tracking-widest shadow-xl active:scale-95"
-          >
-            {copied ? <Check size={18} className="text-emerald-500" strokeWidth={3} /> : <Code size={18} />}
-            {copied ? 'Đã sao chép' : 'Copy Source'}
-          </button>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+            <button 
+              onClick={handleDownload}
+              className="w-full sm:w-auto min-w-[180px] group/btn bg-white/10 backdrop-blur-xl border-2 border-white/20 px-8 py-5 rounded-2xl text-[13px] font-black text-white flex items-center justify-center gap-3 hover:bg-white/20 hover:border-white/40 hover:-translate-y-1 active:scale-95 transition-all duration-300 uppercase tracking-widest shadow-2xl"
+            >
+              <div className="p-1.5 bg-white/20 rounded-lg group-hover/btn:bg-white/40 transition-colors">
+                <Download size={22} />
+              </div>
+              Tải HTML
+            </button>
+            
+            <button 
+              onClick={handleCopy}
+              className={`
+                w-full sm:w-auto min-w-[200px] group/btn relative overflow-hidden px-8 py-5 rounded-2xl text-[13px] font-black flex items-center justify-center gap-3 transition-all duration-500 uppercase tracking-widest shadow-2xl border-2 border-transparent hover:-translate-y-1 active:scale-95
+                ${copied 
+                  ? 'bg-emerald-500 text-white' 
+                  : 'bg-gradient-to-r from-amber-400 to-orange-500 text-slate-900 border-amber-300 hover:shadow-orange-500/40'
+                }
+              `}
+            >
+              <div className={`p-1.5 rounded-lg transition-colors ${copied ? 'bg-white/20' : 'bg-white/40'}`}>
+                {copied ? <Check size={22} strokeWidth={3} /> : <Code size={22} />}
+              </div>
+              <span>{copied ? 'Đã sao chép' : 'Copy Source'}</span>
+              
+              {/* Shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+            </button>
+          </div>
         </div>
       </div>
 
