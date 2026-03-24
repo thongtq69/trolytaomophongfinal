@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, Settings, Monitor, Loader2, FlaskConical, Atom, Dna, Calculator, Check, Upload, FileText, Zap, BookOpen } from 'lucide-react';
-import { SUBJECTS, GRADES, SearchParams, UploadedFile } from '../types';
+import { Search, Sparkles, Settings, Monitor, Loader2, FlaskConical, Atom, Dna, Calculator, Check, Upload, FileText, Zap, BookOpen, Target } from 'lucide-react';
+import { SUBJECTS, GRADES, DEVICE_OPTIONS, SearchParams, UploadedFile } from '../types';
 import FileUploader from './FileUploader';
 
 interface SearchFormProps {
@@ -19,14 +19,24 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onCreateAI }) => {
     topic: '',
     grade: GRADES[7],
     parameters: '',
-    expectedResult: ''
+    expectedResult: '',
+    devices: []
   });
 
   const handleInputChange = (field: keyof SearchParams, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-
+  const handleDeviceChange = (deviceId: string) => {
+    setFormData(prev => {
+      const current = prev.devices;
+      if (current.includes(deviceId)) {
+        return { ...prev, devices: current.filter(d => d !== deviceId) };
+      } else {
+        return { ...prev, devices: [...current, deviceId] };
+      }
+    });
+  };
 
 
 
@@ -222,43 +232,129 @@ const SearchForm: React.FC<SearchFormProps> = ({ isLoading, onCreateAI }) => {
               <span className="text-sm font-bold text-slate-700 uppercase tracking-wide">Chi tiết nâng cao</span>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-6">
               <label className="flex flex-col gap-2">
                 <span className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1">
-                  <Settings size={12} className="text-slate-400" />
+                  <Settings size={12} className="text-slate-500" />
                   Thông số điều chỉnh
                 </span>
                 <textarea
                   rows={2}
                   value={formData.parameters}
                   onChange={(e) => handleInputChange('parameters', e.target.value)}
-                  className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:border-slate-500 focus:ring-4 focus:ring-slate-100 transition-all text-sm py-3 px-4 resize-none hover:border-slate-400"
+                  className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:border-sky-500 focus:ring-4 focus:ring-sky-100 transition-all text-sm py-3 px-4 resize-none hover:border-sky-400"
                   placeholder="Góc tới, điện trở, khối lượng, nhiệt độ..."
                 />
               </label>
 
+              <label className="flex flex-col gap-2">
+                <span className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1">
+                  <Target size={12} className="text-rose-500" />
+                  Kết quả mong đợi
+                </span>
+                <textarea
+                  rows={4}
+                  value={formData.expectedResult}
+                  onChange={(e) => handleInputChange('expectedResult', e.target.value)}
+                  className="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:border-rose-400 focus:ring-4 focus:ring-rose-100 transition-all text-sm py-3.5 px-4 resize-none hover:border-rose-300"
+                  placeholder="Mô tả kết quả bạn muốn thấy (Ví dụ: Có biểu đồ động, có bảng thông số...)"
+                />
+              </label>
 
+              <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+                 <div className="flex items-start gap-3">
+                    <div className="p-2 bg-white rounded-lg shadow-sm">
+                       <Sparkles size={16} className="text-emerald-500" />
+                    </div>
+                    <div>
+                       <p className="text-[11px] font-bold text-emerald-800 uppercase tracking-tight">Mẹo tối ưu AI</p>
+                       <p className="text-[10px] text-emerald-600 font-medium leading-relaxed mt-1">
+                          Cung cấp thông số chi tiết giúp AI tạo ra mô phỏng chính xác hơn 40%.
+                       </p>
+                    </div>
+                 </div>
+              </div>
             </div>
           </div>
 
-          <div className="lg:col-span-12 flex flex-col pt-8 border-t border-slate-50">
+          <div className="lg:col-span-12 flex flex-col pt-10 border-t border-slate-100">
             <button
               type="button"
               onClick={handleSubmitAI}
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-sky-600 to-indigo-700 hover:from-sky-700 hover:to-indigo-800 text-white font-black py-6 px-10 rounded-2xl shadow-2xl shadow-sky-600/30 transition-all flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-1 active:scale-95 uppercase tracking-tight"
+              className="group relative w-full bg-gradient-to-r from-[#dcfce7] via-[#bbf7d0] to-[#86efac] hover:from-[#bbf7d0] hover:to-[#4ade80] text-[#064e3b] rounded-[2rem] p-6 lg:p-8 flex items-center justify-between transition-all shadow-[0_8px_30px_rgba(74,222,128,0.25)] hover:shadow-[0_8px_30px_rgba(74,222,128,0.4)] disabled:opacity-70 disabled:cursor-not-allowed active:scale-[0.99] overflow-hidden border border-[#86efac] hover:border-[#4ade80]"
             >
-              {isLoading ? (
-                <Loader2 className="animate-spin" size={28} />
-              ) : (
-                <Sparkles size={32} className="text-amber-300 drop-shadow-lg" />
-              )}
-              <span className="text-xl">{inputMode === 'file' ? 'Hiện thực hóa từ file bài tập' : 'Dùng AI tạo mô phỏng tương tác'}</span>
-              <span className="px-3 py-1 bg-white/20 rounded-lg text-xs font-mono backdrop-blur-sm border border-white/10 ml-2">VERSION 24.3</span>
+              {/* Lab Tech SVG Background Elements */}
+              <div className="absolute inset-0 opacity-[0.10] pointer-events-none mix-blend-color-burn">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="hexagons-search" width="60" height="52" patternUnits="userSpaceOnUse" patternTransform="scale(1.2)">
+                      <path d="M30 0 L60 17.32 L60 51.96 L30 69.28 L0 51.96 L0 17.32 Z" fill="none" stroke="#064e3b" strokeWidth="1" strokeDasharray="4 4" />
+                      <circle cx="30" cy="0" r="2" fill="#064e3b" />
+                      <circle cx="60" cy="17.32" r="2" fill="#064e3b" />
+                      <circle cx="60" cy="51.96" r="2" fill="#064e3b" />
+                      <circle cx="30" cy="69.28" r="2" fill="#064e3b" />
+                      <circle cx="0" cy="51.96" r="2" fill="#064e3b" />
+                      <circle cx="0" cy="17.32" r="2" fill="#064e3b" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#hexagons-search)" />
+                </svg>
+              </div>
+
+              {/* Spinning Tech Node */}
+              <div className="absolute right-0 top-0 h-full w-1/2 opacity-[0.15] pointer-events-none mix-blend-color-burn flex justify-end">
+                <div className="absolute right-[5%] top-[-80%] w-[350px] h-[350px] animate-[spin_50s_linear_infinite]">
+                  <svg viewBox="0 0 100 100" className="w-full h-full text-[#047857]">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="10 5" className="opacity-60" />
+                    <circle cx="50" cy="5" r="4" fill="currentColor" />
+                    <circle cx="95" cy="50" r="6" fill="currentColor" />
+                    <circle cx="50" cy="95" r="4" fill="currentColor" />
+                    <circle cx="5" cy="50" r="5" fill="currentColor" />
+                    <line x1="50" y1="5" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="95" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="5" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" />
+                    <line x1="50" y1="95" x2="50" y2="50" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="50" cy="50" r="10" fill="currentColor" className="animate-pulse" />
+                    <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" strokeWidth="1" className="animate-ping opacity-20" />
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Additional Subtle Data Rings */}
+              <div className="absolute left-[20%] bottom-[-50%] opacity-10 animate-[spin_40s_linear_infinite_reverse] pointer-events-none">
+                <svg width="250" height="250" viewBox="0 0 100 100" className="text-[#064e3b]">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 6" />
+                  <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="10 4" />
+                </svg>
+              </div>
+
+              <div className="flex items-center gap-6 relative z-10 w-full">
+                <Sparkles size={48} className="text-[#047857] stroke-[1.5] hidden sm:block drop-shadow-sm" />
+                <div className="flex flex-col items-start gap-1 text-left min-w-0">
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <Sparkles size={24} className="text-[#047857] stroke-2 sm:hidden flex-shrink-0" />
+                    <span className="text-xl sm:text-2xl lg:text-3xl font-black uppercase tracking-tight drop-shadow-sm truncate max-w-full text-[#064e3b]">
+                      {inputMode === 'file' ? 'Hiện thực hóa từ file bài tập' : 'Dùng AI tạo mô phỏng tương tác'}
+                    </span>
+                    <span className="px-3 py-1 border border-[#047857]/20 rounded-xl text-[10px] lg:text-xs font-bold tracking-widest bg-white/40 uppercase shadow-sm flex-shrink-0 text-[#0f766e]">
+                      VERSION 24.3
+                    </span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-bold tracking-widest text-[#065f46] uppercase mt-1">
+                    Xây dựng bởi trí tuệ nhân tạo thế hệ mới • Kết quả hiển thị ngay lập tức
+                  </span>
+                </div>
+              </div>
+
+              <div className="hidden sm:flex h-14 w-14 rounded-full border border-[#047857]/20 items-center justify-center bg-white/40 group-hover:bg-white/60 transition-colors shrink-0 relative z-10 shadow-sm group-hover:shadow-md">
+                {isLoading ? (
+                  <Loader2 className="animate-spin text-[#047857]" size={24} />
+                ) : (
+                  <Zap size={24} className="text-[#059669]" />
+                )}
+              </div>
             </button>
-            <p className="text-center text-slate-400 text-xs mt-4 font-bold uppercase tracking-widest">
-              Xây dựng bởi Trí tuệ nhân tạo thế hệ mới • Kết quả hiển thị ngay lập tức
-            </p>
           </div>
         </form>
       </div>
