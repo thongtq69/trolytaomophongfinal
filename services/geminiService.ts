@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { SearchParams, AIResult, UploadedFile } from "../types";
+import { SearchParams, AIResult, UploadedFile, ChatMessage } from "../types";
 
 const SYSTEM_PROMPT = `
 Bạn là chuyên gia lập trình web giáo dục và thiết kế bài giảng STEM.
@@ -39,6 +39,21 @@ Output Format: Bắt buộc sử dụng các separator sau để phân chia nộ
 `;
 
 const FALLBACK_ORDER = ["gemini-3-flash-preview", "gemini-3-pro-preview", "gemini-2.5-flash"];
+
+const CHAT_SYSTEM_PROMPT = `
+Bạn là trợ lý AI đồng hành cùng giáo viên trong Simulab AI.
+Nhiệm vụ:
+- Trả lời câu hỏi bám sát mô phỏng hiện tại và ngữ cảnh đã được cung cấp.
+- Ưu tiên giải thích dễ hiểu, ngắn gọn, chính xác bằng tiếng Việt.
+- Nếu người dùng hỏi cách chỉnh sửa, mở rộng hoặc sử dụng mô phỏng, hãy dựa trên HTML, hướng dẫn và câu hỏi thực hành đã nạp.
+- Nếu thông tin không có trong ngữ cảnh, hãy nói rõ là chưa đủ dữ liệu thay vì bịa.
+- Khi phù hợp, gợi ý bước tiếp theo cho giáo viên hoặc học sinh.
+`;
+
+interface SimulationChatContext {
+  params: SearchParams;
+  result: AIResult;
+}
 
 // Build multimodal content from files
 const buildContentFromFiles = (files: UploadedFile[], params: SearchParams): any[] => {
@@ -132,6 +147,72 @@ const parseAIResponse = (text: string): AIResult => {
     questions: questionsMatch ? questionsMatch[1].trim() : "Không có câu hỏi được tạo.",
     guide: guideMatch ? guideMatch[1].trim() : "Không có hướng dẫn được tạo."
   };
+};
+
+const serializeUploadedFiles = (files?: UploadedFile[]): string => {
+  if (!files || files.length === 0) {
+    return "Không có file tải lên.";
+  }
+
+  return files.map((file, index) => {
+    const contentPreview = file.type === 'image'
+      ? 'Ảnh đã được tải lên và gửi kèm cho AI trong quá trình tạo mô phỏng.'
+      : file.content.slice(0, 2000) || 'Không có nội dung trích xuất.';
+
+    return [
+      `File ${index + 1}: ${file.name}`,
+      `Loại: ${file.type}`,
+      `Nội dung tóm tắt: ${contentPreview}`
+    ].join('\n');
+  }).join('\n\n');
+};
+
+const buildSimulationChatPrompt = (
+  question: string,
+  history: ChatMessage[],
+  context: SimulationChatContext
+) => {
+  const recentHistory = history.slice(-8).map(message => {
+    const speaker = message.role === 'user' ? 'Người dùng' : 'Trợ lý';
+    return `${speaker}: ${message.content}`;
+  }).join('\n');
+
+  return `
+NGỮ CẢNH MÔ PHỎNG HIỆN TẠI
+
+1. THÔNG TIN YÊU CẦU BAN ĐẦU
+- Môn học: ${context.params.subject}
+- Chủ đề: ${context.params.topic}
+- Đối tượng: ${context.params.grade}
+- Thông số điều chỉnh: ${context.params.parameters || 'Không có'}
+- Kết quả mong đợi: ${context.params.expectedResult || 'Không có'}
+- Thiết bị: ${context.params.devices.length > 0 ? context.params.devices.join(', ') : 'Mặc định'}
+
+2. FILE ĐÃ NẠP (NẾU CÓ)
+${serializeUploadedFiles(context.params.uploadedFiles)}
+
+3. HƯỚNG DẪN VÀ CÂU HỎI ĐÃ TẠO
+[CÂU HỎI THỰC HÀNH]
+${context.result.questions}
+
+[HƯỚNG DẪN SỬ DỤNG]
+${context.result.guide}
+
+4. MÃ HTML MÔ PHỎNG HIỆN TẠI
+${context.result.html}
+
+5. LỊCH SỬ TRAO ĐỔI GẦN ĐÂY
+${recentHistory || 'Chưa có lịch sử hỏi đáp trước đó.'}
+
+6. CÂU HỎI MỚI NHẤT TỪ NGƯỜI DÙNG
+${question}
+
+YÊU CẦU TRẢ LỜI
+- Trả lời đúng trong phạm vi mô phỏng hiện tại.
+- Nếu người dùng hỏi cách sửa mô phỏng, nêu rõ nên đổi thành phần nào, hành vi nào hoặc logic nào.
+- Nếu người dùng hỏi cách dạy học, gợi ý cách trình bày trên lớp dựa trên mô phỏng và bộ câu hỏi/hướng dẫn đã có.
+- Không đưa ra thông tin không có cơ sở từ ngữ cảnh trên.
+`;
 };
 
 export const generateSimulationContent = async (
@@ -254,4 +335,42 @@ export const generateFromFiles = async (
     throw new Error(`Đã dừng do lỗi quá tải (429 RESOURCE_EXHAUSTED). Hết quota API.`);
   }
   throw new Error(`Không thể tạo mô phỏng từ file. Lỗi: ${lastError?.message || "Unknown error"}`);
+};
+
+export const askSimulationAssistant = async (
+  question: string,
+  history: ChatMessage[],
+  context: SimulationChatContext,
+  apiKey: string,
+  startModel: string = "gemini-3-flash-preview"
+): Promise<string> => {
+  const modelChain = [startModel, ...FALLBACK_ORDER.filter(m => m !== startModel)];
+  let lastError: any;
+
+  for (const model of modelChain) {
+    try {
+      const ai = new GoogleGenAI({ apiKey });
+      const prompt = buildSimulationChatPrompt(question, history, context);
+
+      const response = await ai.models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          systemInstruction: CHAT_SYSTEM_PROMPT,
+        }
+      });
+
+      const text = (response.text || "").trim();
+      if (!text) {
+        throw new Error("Model không trả về nội dung hỏi đáp.");
+      }
+
+      return text;
+    } catch (error: any) {
+      lastError = error;
+      continue;
+    }
+  }
+
+  throw new Error(`Không thể trả lời lúc này. Lỗi: ${lastError?.message || "Unknown error"}`);
 };

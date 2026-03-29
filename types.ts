@@ -36,6 +36,12 @@ export interface AIResult {
   guide: string;
 }
 
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+}
+
 export type SearchStatus = 'idle' | 'searching' | 'found' | 'generating' | 'generated' | 'error' | 'no-result';
 
 export const SUBJECTS = [

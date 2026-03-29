@@ -222,12 +222,18 @@ function App() {
                      </div>
                    )}
 
-                   {/* ─── SUCCESS: AI Result ─── */}
-                   {status === 'generated' && aiResult && searchParams && (
-                     <div className="animate-in fade-in slide-in-from-bottom-12 duration-1000">
-                        <ResultGenerated data={aiResult} topic={searchParams.topic} />
-                     </div>
-                   )}
+                    {/* ─── SUCCESS: AI Result ─── */}
+                    {status === 'generated' && aiResult && searchParams && (
+                      <div className="animate-in fade-in slide-in-from-bottom-12 duration-1000">
+                        <ResultGenerated
+                          data={aiResult}
+                          topic={searchParams.topic}
+                          searchParams={searchParams}
+                          apiKey={apiKey}
+                          selectedModel={selectedModel}
+                        />
+                      </div>
+                    )}
                 </div>
               )}
             </div>

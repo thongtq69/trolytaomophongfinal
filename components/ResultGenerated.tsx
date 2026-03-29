@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Sparkles, Download, Code, Check } from 'lucide-react';
-import { AIResult } from '../types';
+import { AIResult, SearchParams } from '../types';
+import SimulationChatBox from './SimulationChatBox';
 
 interface ResultGeneratedProps {
   data: AIResult;
   topic: string;
+  searchParams: SearchParams;
+  apiKey: string;
+  selectedModel: string;
 }
 
-const ResultGenerated: React.FC<ResultGeneratedProps> = ({ data, topic }) => {
+const ResultGenerated: React.FC<ResultGeneratedProps> = ({ data, topic, searchParams, apiKey, selectedModel }) => {
   const [copied, setCopied] = useState(false);
   
   const handleDownload = () => {
@@ -144,6 +148,14 @@ const ResultGenerated: React.FC<ResultGeneratedProps> = ({ data, topic }) => {
             </div>
          </div>
       </div>
+
+      <SimulationChatBox
+        topic={topic}
+        params={searchParams}
+        result={data}
+        apiKey={apiKey}
+        model={selectedModel}
+      />
     </div>
   );
 };
